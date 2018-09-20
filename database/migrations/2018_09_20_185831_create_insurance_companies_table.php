@@ -14,8 +14,10 @@ class CreateInsuranceCompaniesTable extends Migration
     public function up()
     {
         Schema::create('insurance_companies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+			$table->increments('id'); // @todo Temporary - should be number of the insurance company
+			$table->string('name');
+			
+			//$table->primary('id');
         });
     }
 

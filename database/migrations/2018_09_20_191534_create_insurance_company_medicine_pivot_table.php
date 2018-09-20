@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class App\ extends Migration
+class CreateInsuranceCompanyMedicinePivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class App\ extends Migration
             $table->foreign('insurance_company_id')->references('id')->on('insurance_companies')->onDelete('cascade');
             $table->integer('medicine_id')->unsigned()->index();
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
-            $table->primary(['insurance_company_id', 'medicine_id']);
+            $table->primary(['insurance_company_id', 'medicine_id'], 'insurance_company_medicine_id'); // Custom name because it was too long for MySQL
         });
     }
 
