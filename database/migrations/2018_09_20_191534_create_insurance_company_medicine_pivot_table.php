@@ -18,6 +18,8 @@ class CreateInsuranceCompanyMedicinePivotTable extends Migration
             $table->integer('medicine_id')->unsigned()->index();
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
             $table->primary(['insurance_company_id', 'medicine_id'], 'insurance_company_medicine_id'); // Custom name because it was too long for MySQL
+        
+			$table->unsignedDecimal('amount', 5, 2);
         });
     }
 

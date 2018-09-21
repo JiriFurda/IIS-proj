@@ -18,6 +18,10 @@ class CreateMedicineReservationPivotTable extends Migration
             $table->integer('reservation_id')->unsigned()->index();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->primary(['medicine_id', 'reservation_id']);
+            
+			$table->string('customer_name');
+            $table->timestamp('created_at')->useCurrent();
+            $table->boolean('picked_up')->default(false);
         });
     }
 
