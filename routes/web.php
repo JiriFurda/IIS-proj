@@ -11,9 +11,15 @@
 |
 */
 
+
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+Route::get('/medicine', 'MedicineController@index');
+Route::get('/medicine/{medicine}', 'MedicineController@show')->name('medicine.show');;
 
 Auth::routes();
 

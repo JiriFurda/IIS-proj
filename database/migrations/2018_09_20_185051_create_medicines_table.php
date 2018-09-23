@@ -15,8 +15,8 @@ class CreateMedicinesTable extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->boolean('subscripted');
+            $table->string('name')->unique();
+            $table->boolean('prescription');
             $table->decimal('price', 5, 2);
         });
     }
