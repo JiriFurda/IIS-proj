@@ -7,9 +7,7 @@
 <ul>
 	@foreach(Medicine::all() as $medicine)
 		<li>
-			<a href="{{ route('medicine.show', compact('medicine')) }}">
-				{{ $medicine->name }}
-			</a>
+			{!! $medicine->nameLink() !!}
 		</li>
 	@endforeach
 </ul>

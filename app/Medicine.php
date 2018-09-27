@@ -52,4 +52,10 @@ class Medicine extends Model
 
     	$this->branches()->syncWithoutDetaching([$branch->id => ['amount' => $newAmount]]);
     }
+
+
+    public function nameLink()
+    {
+    	return '<a href="'.route('medicine.show', $this).'" title="Detail léku">'.$this->name.'</a>';
+    }
 }

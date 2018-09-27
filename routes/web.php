@@ -18,8 +18,11 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/medicine', 'MedicineController@index');
-Route::get('/medicine/{medicine}', 'MedicineController@show')->name('medicine.show');;
+Route::get('/medicine', 'MedicineController@index')->name('medicine.index');
+Route::get('/medicine/{medicine}', 'MedicineController@show')->name('medicine.show');
+
+Route::get('/branch', 'BranchController@index')->name('branch.index');
+Route::get('/branch/{branch}', 'BranchController@show')->name('branch.show');;
 
 Auth::routes();
 

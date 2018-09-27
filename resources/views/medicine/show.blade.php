@@ -12,4 +12,20 @@
 </ul>
 
 <h2>Dostupnost:</h2>
-@todo
+<?php
+	$query = $medicine->branches()->wherePivot('amount', '>', 0);
+?>
+	
+	@if($query->count())
+		
+		<ul>
+			@foreach ($query->get() as $branch)
+				<li>
+					{!! $branch->nameLink() !!} ({{$branch->pivot->amount}} ks)
+				</li>
+			@endforeach
+		<ul>
+
+	@else
+		Lék není na skladě na žádné z poboček
+	@endif

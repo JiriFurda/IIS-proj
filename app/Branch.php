@@ -12,4 +12,9 @@ class Branch extends Model
     {
         return $this->belongsToMany('App\Medicine')->withPivot('amount');;
     }
+
+    public function nameLink()
+    {
+    	return '<a href="'.route('branch.show', $this).'" title="Detail pobočky">'.$this->name.'</a>';
+    }
 }
