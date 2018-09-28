@@ -15,6 +15,6 @@ class Branch extends Model
 
     public function nameLink()
     {
-    	return '<a href="'.route('branch.show', $this).'" title="Detail pobočky">'.$this->name.'</a>';
+    	return '<a href="'.route('branches.show', $this).'" title="Detail pobočky">'.$this->name.'</a>';
     }
 }

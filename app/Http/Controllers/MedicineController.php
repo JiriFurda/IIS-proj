@@ -9,12 +9,12 @@ class MedicineController extends Controller
 {
     public function index()
     {
-    	return view('medicine.index');
+    	return view('medicines.index');
     }
 
     public function show(Medicine $medicine)
     {
-    	return view('medicine.show', compact('medicine'));
+    	return view('medicines.show', compact('medicine'));
     }
 
 }

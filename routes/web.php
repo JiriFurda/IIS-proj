@@ -18,11 +18,19 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/medicine', 'MedicineController@index')->name('medicine.index');
-Route::get('/medicine/{medicine}', 'MedicineController@show')->name('medicine.show');
+Route::get('/', 'MedicineController@index');
 
-Route::get('/branch', 'BranchController@index')->name('branch.index');
-Route::get('/branch/{branch}', 'BranchController@show')->name('branch.show');;
+Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
+Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show');
+
+Route::get('/branches', 'BranchController@index')->name('branches.index');
+Route::get('/branches/{branch}', 'BranchController@show')->name('branches.show');
+
+Route::get('/insurance_companies', 'InsuranceComapnyController@index')->name('insurance_companies.index');
+Route::get('/insurance_companies/{insuranceCompany}', 'InsuranceComapnyController@show')->name('insurance_companies.show');
+
+Route::get('/suppliers', 'SupplierController@index')->name('suppliers.index');
+Route::get('/suppliers/{supplier}', 'SupplierController@show')->name('suppliers.show');
 
 Auth::routes();
 

@@ -9,11 +9,11 @@ class BranchController extends Controller
 {
     public function index()
     {
-    	return view('branch.index');
+    	return view('branches.index');
     }
 
     public function show(Branch $branch)
     {
-    	return view('branch.show', compact('branch'));
+    	return view('branches.show', compact('branch'));
     }
 }

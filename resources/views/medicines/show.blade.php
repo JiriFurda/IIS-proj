@@ -1,8 +1,3 @@
-<?php
-  use App\Medicine;
-?>
-
-
 <h1>Lék: {{ $medicine->name }}</h1>
 
 <h2>Informace:</h2>
@@ -24,8 +19,30 @@
 					{!! $branch->nameLink() !!} ({{$branch->pivot->amount}} ks)
 				</li>
 			@endforeach
-		<ul>
+		</ul>
 
 	@else
-		Lék není na skladě na žádné z poboček
+		Lék není na skladě na žádné z poboček.
 	@endif
+
+
+
+<h2>Dodavatelé:</h2>
+<?php
+	$query = $medicine->suppliers;
+?>
+	
+	@if($query->count())
+		
+		<ul>
+			@foreach ($query as $supplier)
+				<li>
+					{!! $supplier->nameLink() !!} ({{ $supplier->pivot->price }} Kč)
+				</li>
+			@endforeach
+		</ul>
+
+	@else
+		Lék není dodáván ani jedním z dodavatelů.
+	@endif
+

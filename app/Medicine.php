@@ -10,7 +10,12 @@ class Medicine extends Model
 
     public function branches()
     {
-        return $this->belongsToMany('App\Branch')->withPivot('amount');;
+        return $this->belongsToMany(Branch::class)->withPivot('amount');
+    }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class)->withPivot('price');
     }
 
 
@@ -56,6 +61,6 @@ class Medicine extends Model
 
     public function nameLink()
     {
-    	return '<a href="'.route('medicine.show', $this).'" title="Detail léku">'.$this->name.'</a>';
+    	return '<a href="'.route('medicines.show', $this).'" title="Detail léku">'.$this->name.'</a>';
     }
 }
