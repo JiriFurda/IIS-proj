@@ -99,4 +99,13 @@ return [
         ],
     ],
 
+
+    // Custom
+    'first_user' => [
+        'enabled' => true,
+        'email' => env('FIRST_USER_EMAIL', 'admin@example.com'),
+        'name' => env('FIRST_USER_NAME', 'Admin'),
+        'password' => env('FIRST_USER_PASSWORD', 'secret')
+    ],
+
 ];

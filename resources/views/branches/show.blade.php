@@ -1,21 +1,18 @@
-<?php
-  use App\Branch;
-  use App\Medicine;
-?>
+@extends('layouts.app')
 
+@section('content')
+	<h1>Pobočka: {{ $branch->name }}</h1>
 
-<h1>Pobočka: {{ $branch->name }}</h1>
+	<h2>Informace:</h2>
+	<ul>
+		<li>Adresa: {{ $branch->name }}</li>
+	</ul>
 
-<h2>Informace:</h2>
-<ul>
-	<li>Adresa: {{ $branch->name }}</li>
-</ul>
-
-<h2>Sklad:</h2>
-<?php
-	$query = $branch->medicines()->wherePivot('amount', '>', 0);
-?>
-	
+	<h2>Sklad:</h2>
+	<?php
+		$query = $branch->medicines()->wherePivot('amount', '>', 0);
+	?>
+		
 	@if($query->count())
 		
 		<ul>
@@ -29,3 +26,4 @@
 	@else
 		Na skladě není žádný lék.
 	@endif
+@endsection

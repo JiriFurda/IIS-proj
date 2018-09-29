@@ -1,7 +1,9 @@
-<h1>Dodavatel: {{ $supplier->name }}</h1>
+@extends('layouts.app')
 
+@section('content')
+	<h1>Dodavatel: {{ $supplier->name }}</h1>
 
-<h2>Nabídka:</h2>	
+	<h2>Nabídka:</h2>	
 	@if($supplier->medicines()->count())
 		
 		<ul>
@@ -15,4 +17,5 @@
 	@else
 		Tento dodvatel aktuálně nedodává žádné léky.
 	@endif
+@endsection
 	

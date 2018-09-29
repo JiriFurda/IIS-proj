@@ -12,16 +12,17 @@
 */
 
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
+
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart.index');
+
 
 Route::get('/', 'MedicineController@index');
 
 Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
 Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show');
+Route::post('/medicines/{medicine}/cart', 'CartController@store')->name('medicines.store');
 
 Route::get('/branches', 'BranchController@index')->name('branches.index');
 Route::get('/branches/{branch}', 'BranchController@show')->name('branches.show');
