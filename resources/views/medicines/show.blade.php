@@ -1,5 +1,6 @@
 <?php
 	use App\Classes\Cart;
+	use App\Branch;
 ?>
 
 @extends('layouts.app')
@@ -20,13 +21,18 @@
 	</ul>
 
 	<h2>Dostupnost:</h2>
+	Na této pobočce {{ Branch::current()->getQuantityInStock($medicine) }} ks
+
+
+	<h2>Dostupnost na dalších pobočkách:</h2>
 	<?php
-		$query = $medicine->branches()->wherePivot('amount', '>', 0);
+		$query = $medicine->branches()->exceptCurrent()->wherePivot('amount', '>', 0);
 	?>
 		
 		@if($query->count())
 			
 			<ul>
+
 				@foreach ($query->get() as $branch)
 					<li>
 						{!! $branch->nameLink() !!} ({{$branch->pivot->amount}} ks)

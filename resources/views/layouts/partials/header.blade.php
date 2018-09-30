@@ -1,5 +1,6 @@
 <?php
 	use App\Classes\Cart;
+	use App\Branch;
 ?>
 
 @auth
@@ -19,6 +20,11 @@
     </div>
     <!-- User detail section end -->
 
+
+
+    <div>
+    	Pobočka: {!! Branch::current()->nameLink() !!}
+    </div>
 
 
 

@@ -23,7 +23,7 @@ class Medicine extends Model
     public function increaseAmountInBranch(Branch $branch, $addAmount)
     {
  		// Check input parameter
-    	if(!is_int($newAmount))
+    	if(!is_int($addAmount))
     		abort(500, 'increaseAmountInBranch(): Value is not an integer');
  
     	// Search if pivot exists

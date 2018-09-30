@@ -8,6 +8,11 @@ use App\Classes\Cart;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+		return view('cart.index');
+    }
+
     public function store(Medicine $medicine)
     {
         $this->validate(request(), [

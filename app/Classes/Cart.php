@@ -5,7 +5,7 @@ namespace App\Classes;
 use Illuminate\Database\Eloquent\Model;
 use App\Medicine;
 
-class Cart
+abstract class Cart
 {
     public static function add(Medicine $medicine, $count = 1)
     {
@@ -72,5 +72,31 @@ class Cart
             abrot(500, "Cart::remove(): Id léku nenalazeno v košíku.");
 
         session()->put('cart', $cart);
+    }
+
+    public static function hasPrescriptedMedicine()
+    {
+        foreach(self::items() as $cartItem)
+        {
+            if($cartItem->medicine->prescripted)
+                return true;
+        }
+
+        return false;
+    }
+
+    public static function verifyStock()
+    {
+        foreach(self::items() as $cartItem)
+        {
+            if(!$cartItem->verifyStock())
+                return false;
+        }
+        return true;
+    }
+
+    public static function earse()
+    {
+        session()->forget('cart');
     }
 }

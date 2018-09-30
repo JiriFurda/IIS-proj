@@ -17,6 +17,9 @@ class CreateSalesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('branch_id');
             //$table->unsignedBigInteger('customer_nin', 10)->nullable();
+            $table->timestamps();
+            $table->timestamp('confirmed_at')->nullable();
+            $table->boolean('confirmed')->default(false);
         });
     }
 
