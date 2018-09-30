@@ -18,4 +18,28 @@ class CartController extends Controller
 
     	return back();
     }
+
+    public function update(Medicine $medicine)
+    {
+		$this->validate(request(), 
+		[
+		    'medicines'    => 'required|array|min:1',
+		    'medicines.*.quantity'  => 'required|integer|min:1',
+		    'medicines.*.id'  => 'required|integer|distinct|exists:medicines,id'
+		]);
+
+		foreach(request()->input('medicines.*') as $requestItem)
+		{
+			Cart::update($requestItem['id'], $requestItem['quantity']);
+		}
+
+		return back();
+    }
+
+    public function delete(Medicine $medicine)
+    {
+    	Cart::remove($medicine);
+
+		return back();
+    }
 }

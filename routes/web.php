@@ -22,7 +22,10 @@ Route::get('/', 'MedicineController@index');
 
 Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
 Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show');
+
 Route::post('/medicines/{medicine}/cart', 'CartController@store')->name('medicines.store');
+Route::post('/cart/update', 'CartController@update')->name('cart.update');
+Route::get('/cart/{medicine}/delete', 'CartController@delete')->name('cart.delete');
 
 Route::get('/branches', 'BranchController@index')->name('branches.index');
 Route::get('/branches/{branch}', 'BranchController@show')->name('branches.show');

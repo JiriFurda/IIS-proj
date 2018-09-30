@@ -25,8 +25,6 @@ class Cart
             return 0;
 
         return array_sum(session('cart'));
-
-        //$request->session()->put('cart', '');
     }
 
     public static function items()
@@ -48,7 +46,31 @@ class Cart
 
 
         return $items;
+    }
 
-        //$request->session()->put('cart', '');
+    public static function isEmpty()
+    {
+        return ( !session()->has('cart') || empty(session('cart')) );
+    }
+
+    public static function update($medicineId, $count = 1)
+    {
+        $cart = session('cart', array());
+
+        $cart[$medicineId] = $count;
+
+        session()->put('cart', $cart);
+    }
+
+    public static function remove(Medicine $medicine)
+    {
+        $cart = session('cart', array());
+
+        if(array_key_exists($medicine->id, $cart))
+            unset($cart[$medicine->id]);
+        else
+            abrot(500, "Cart::remove(): Id léku nenalazeno v košíku.");
+
+        session()->put('cart', $cart);
     }
 }
