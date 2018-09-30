@@ -16,19 +16,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    @auth
-        <b>{{ auth()->user()->name }}</b>
-        <a href="{{ route('logout') }}"
-           onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
-            {{ __('Odhlásit se') }}
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-
-        @include('layouts.partials.cart')
-    @endauth
+    @include('layouts.partials.header')
 
     @yield('content')
 </body>

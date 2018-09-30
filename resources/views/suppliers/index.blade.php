@@ -1,3 +1,7 @@
+<?php
+	use App\Supplier;
+?>
+
 @extends('layouts.app')
 
 @section('content')

@@ -1,3 +1,7 @@
+<?php
+	use App\Branch;
+?>
+
 @extends('layouts.app')
 
 @section('content')
