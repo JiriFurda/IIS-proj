@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medicine extends Model
 {
+    // --- Laravel settings ---
 	public $timestamps = false;
 
+
+    // --- Eloquent relationships ---
     public function branches()
     {
         return $this->belongsToMany(Branch::class)->withPivot('amount');
@@ -19,7 +22,14 @@ class Medicine extends Model
     }
 
 
+    // --- Getters ---
+    public function nameLink()
+    {
+        return '<a href="'.route('medicines.show', $this).'" title="Detail léku">'.$this->name.'</a>';
+    }
 
+
+    // --- Class methods ---
     public function increaseAmountInBranch(Branch $branch, $addAmount)
     {
  		// Check input parameter
@@ -46,9 +56,6 @@ class Medicine extends Model
     	$this->increaseAmountInBranch($branch, -$subAmount);
     }
 
-
-
-
     // @todo Check if new value is out of range
     private function setAmountInBranch(Branch $branch, $newAmount)
     {
@@ -56,11 +63,5 @@ class Medicine extends Model
     		abort(500, 'setAmountInBranch(): Value is not an integer');
 
     	$this->branches()->syncWithoutDetaching([$branch->id => ['amount' => $newAmount]]);
-    }
-
-
-    public function nameLink()
-    {
-    	return '<a href="'.route('medicines.show', $this).'" title="Detail léku">'.$this->name.'</a>';
     }
 }

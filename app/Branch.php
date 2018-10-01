@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
+    // --- Laravel settings ---
 	public $timestamps = false;
 	
+
+    // --- Eloquent relationships ---
     public function medicines()
     {
         return $this->belongsToMany(Medicine::class)->withPivot('amount');;
@@ -18,20 +21,18 @@ class Branch extends Model
         return $this->hasMany(Sale::class);
     }
 
-    public function nameLink()
-    {
-    	return '<a href="'.route('branches.show', $this).'" title="Detail pobočky">'.$this->name.'</a>';
-    }
 
-    public static function current()
-    {
-        return Branch::first(); // @todo dummy result
-    }
-
-
+    // --- Scopes ---
     public function scopeExceptCurrent($query)
     {
         return $query->where('id', '<>', Branch::current()->id);
+    }
+
+
+    // --- Getters ---
+    public function nameLink()
+    {
+    	return '<a href="'.route('branches.show', $this).'" title="Detail pobočky">'.$this->name.'</a>';
     }
 
     public function getQuantityInStock(Medicine $medicine)
@@ -41,8 +42,17 @@ class Branch extends Model
         return 0;
     }
 
+
+    // --- Relationship constructors ---
     public function addSale($requestData = [])
     {
         return $this->sales()->create($requestData);
+    }
+
+
+    // --- Static methods ---
+    public static function current()
+    {
+        return Branch::first(); // @todo dummy result
     }
 }
