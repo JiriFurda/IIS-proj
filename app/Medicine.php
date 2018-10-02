@@ -21,6 +21,14 @@ class Medicine extends Model
         return $this->belongsToMany(Supplier::class)->withPivot('price');
     }
 
+    /*
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class)->withPivot('quantity', 'price_per_item');
+    }
+    */
+
+
 
     // --- Getters ---
     public function nameLink()
@@ -29,12 +37,23 @@ class Medicine extends Model
     }
 
 
+
+    // --- Accessors ---
+    public function getOverallPriceAttribute()
+    {
+        if(is_null($this->pivot))
+            abort(500, 'Medicine::getOverallPriceAttribute(): Model is missing a pivot');
+
+        return $this->pivot->price_per_item * $this->pivot->quantity;
+    }
+
+
     // --- Class methods ---
     public function increaseAmountInBranch(Branch $branch, $addAmount)
     {
  		// Check input parameter
     	if(!is_int($addAmount))
-    		abort(500, 'increaseAmountInBranch(): Value is not an integer');
+    		abort(500, 'Medicine::increaseAmountInBranch(): Value is not an integer');
  
     	// Search if pivot exists
     	$existingRecord = $this->branches()->find($branch->id);

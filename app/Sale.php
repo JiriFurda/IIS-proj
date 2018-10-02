@@ -12,9 +12,9 @@ class Sale extends Model
         return $this->belongsToOne(Branch::class);
     }
 
-    public function soldMedicines()
+    public function medicines()
     {
-        return $this->hasMany(SoldMedicine::class);
+        return $this->belongsToMany(Medicine::class)->withPivot('quantity', 'price_per_item');
     }
 
 

@@ -26,8 +26,8 @@ Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart/update', 'CartController@update')->name('cart.update');
 Route::get('/cart/{medicine}/delete', 'CartController@delete')->name('cart.delete');
 
-Route::get('/sale/store', 'SaleController@store')->name('sale.store');
-Route::get('/sale/{sale}', 'SaleController@show')->name('sale.show');
+Route::get('/sales/store', 'SaleController@store')->name('sales.store');
+Route::get('/sales/{sale}', 'SaleController@show')->name('sales.show');
 
 Route::get('/branches', 'BranchController@index')->name('branches.index');
 Route::get('/branches/{branch}', 'BranchController@show')->name('branches.show');

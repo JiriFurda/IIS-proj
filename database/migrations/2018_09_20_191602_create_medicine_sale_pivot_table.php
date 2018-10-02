@@ -19,8 +19,8 @@ class CreateMedicineSalePivotTable extends Migration
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->primary(['medicine_id', 'sale_id']);
             
-            $table->unsignedSmallInteger('amount');
-            $table->unsignedSmallInteger('medicine_price');
+            $table->unsignedSmallInteger('quantity');
+            $table->unsignedSmallInteger('price_per_item');
         });
     }
 

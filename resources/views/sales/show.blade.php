@@ -9,20 +9,29 @@
 
 	<h2>Souhrn prodaného zboží</h2>
 	<table>
+		<thead>
+			<tr>
+				<th>Název léku</th>
+				<th>Počet kusů</th>
+				<th>Cena za kus</th>
+				<th>Celková cena</th>
+				
+			</tr>
+		</thead>
 		<tbody>
-			@foreach($sale->soldMedicines as $soldMedicine)
+			@foreach($sale->medicines as $medicine)
 				<tr>
 					<td>
-						{!! $soldMedicine->nameLink() !!}
+						{!! $medicine->nameLink() !!}
 					</td>
 					<td>
-						{{ $soldMedicine->quantity }} ks
+						{{ $medicine->pivot->quantity }} ks
 					</td>
 					<td>
-						{{ $soldMedicine->price }} Kč / ks
+						{{ $medicine->pivot->price_per_item }} Kč / ks
 					</td>
 					<td>
-						<b>{{ $soldMedicine->overall_price }} Kč</b>
+						<b>{{ $medicine->overall_price }} Kč</b>
 					</td>
 				</tr>
 			@endforeach

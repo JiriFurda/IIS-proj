@@ -36,18 +36,28 @@ class SaleController extends Controller
 
     	foreach(Cart::items() as $cartItem)
     	{
+            /*
     		$sale->addSoldMedicine([
     			'medicine_id' => $cartItem->medicine->id,
     			'name' => $cartItem->medicine->name,
     			'price' => $cartItem->medicine->price,
     			'quantity' => $cartItem->quantity
     		]);
+            */
+           
+            $sale->medicines()->attach($cartItem->medicine->id,
+                [
+                    'quantity' => $cartItem->quantity,
+                    'price_per_item' => $cartItem->medicine->price
+                ]);
 
     		$cartItem->medicine->decreaseAmountInBranch($branch, $cartItem->quantity);
+
+            // @todo Critical part! Throw + catch and revert whole sale if something goes wrong
     	}
 
     	Cart::earse();
 
-    	return redirect()->route('sale.show', $sale);
+    	return redirect()->route('sales.show', $sale);
     }
 }

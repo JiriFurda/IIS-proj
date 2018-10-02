@@ -55,7 +55,7 @@
 			</table>
 			Celkem: X Kč
 			<button type="submit">Upravit množství</button>
-			<a href="{{ route('sale.store') }}">Dokončit nákup</a>
+			<a href="{{ route('sales.store') }}">Dokončit nákup</a>
 		</form>
 		{{ $errors }}
 	@endif
