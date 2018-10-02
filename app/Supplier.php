@@ -20,6 +20,6 @@ class Supplier extends Model
     // --- Getters ---
     public function nameLink()
     {
-    	return '<a href="'.route('suppliers.show', $this).'" title="Detail dodavatelel">'.$this->name.'</a>';
+    	return '<a href="'.route('suppliers.show', $this).'" title="Detail dodavatele">'.$this->name.'</a>';
     }
 }

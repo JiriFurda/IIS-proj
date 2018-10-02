@@ -16,6 +16,7 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('branch_id');
+            $table->unsignedInteger('user_id');
             //$table->unsignedBigInteger('customer_nin', 10)->nullable();
             $table->timestamps();
             $table->timestamp('confirmed_at')->nullable();
