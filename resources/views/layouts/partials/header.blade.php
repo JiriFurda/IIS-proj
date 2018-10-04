@@ -25,7 +25,8 @@
 
 
 	    <div>
-	    	Pobočka: {!! Branch::current()->nameLink() !!}
+	    	<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>
+	    	<div>Role: {{ auth()->user()->role->name }}</div>
 	    </div>
 
 
