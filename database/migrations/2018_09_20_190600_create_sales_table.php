@@ -21,6 +21,9 @@ class CreateSalesTable extends Migration
             $table->timestamps();
             $table->timestamp('confirmed_at')->nullable();
             $table->boolean('confirmed')->default(false);
+
+            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

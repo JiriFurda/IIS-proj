@@ -21,6 +21,8 @@ class CreateRolesTable extends Migration
             $table->string('name');
 
             $table->timestamps();
+
+            $table->foreign('inherit_id')->references('id')->on('roles');
         });
     }
 
