@@ -40,6 +40,9 @@ Route::get('/insurance_companies/{insuranceCompany}', 'InsuranceComapnyControlle
 Route::get('/suppliers', 'SupplierController@index')->name('suppliers.index');
 Route::get('/suppliers/{supplier}', 'SupplierController@show')->name('suppliers.show');
 
+Route::get('/reservations/create', 'ReservationController@create')->name('reservations.create');
+Route::post('/reservations/store', 'ReservationController@store')->name('reservations.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

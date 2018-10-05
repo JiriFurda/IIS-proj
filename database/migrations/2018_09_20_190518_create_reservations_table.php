@@ -17,7 +17,11 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('branch_id');
             $table->string('customer_name');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
+
+            $table->boolean('completed')->default(false);
+            $table->timestamp('completed_at')->nullable();
+
 
             $table->foreign('branch_id')->references('id')->on('branches');
         });
