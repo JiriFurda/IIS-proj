@@ -19,9 +19,12 @@
 Route::get('/', 'MedicineController@index');
 
 Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
+Route::get('/medicines/create', 'MedicineController@create')->name('medicines.create')->middleware('role:superior');
+Route::post('/medicines/create', 'MedicineController@store')->name('medicines.store')->middleware('role:superior');
 Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show');
 Route::get('/medicines/{medicine}/edit', 'MedicineController@edit')->name('medicines.edit')->middleware('role:superior');
 Route::post('/medicines/{medicine}/edit', 'MedicineController@update')->name('medicines.update')->middleware('role:superior');
+
 
 Route::post('/medicines/{medicine}/cart', 'CartController@store')->name('medicines.store');
 Route::get('/cart', 'CartController@index')->name('cart.index');
