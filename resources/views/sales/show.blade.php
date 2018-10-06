@@ -4,6 +4,7 @@
 	<h1>Prodej: {{ $sale->name }}</h1>
 	<ul>
 		<li>Stav: {{ $sale->state }}</li>
+		<li>Pobočka: {!! $sale->branch->nameLink() !!}</li>
 		<li>Vytvořil: {{ $sale->user->name }}</li>
 		<li>Čas vytvoření: {{ $sale->created_at }}</li>
 		@if($sale->confirmed)
@@ -20,9 +21,9 @@
 		<thead>
 			<tr>
 				<th>Název léku</th>
-				<th>Počet kusů</th>
+				<th>Množství</th>
 				<th>Cena za kus</th>
-				<th>Celková cena</th>
+				<th>Cena</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,4 +45,7 @@
 			@endforeach
 		</tbody>
 	</table>
+
+	Celková cena: <b>{{ $sale->overall_price }} Kč</b>
+
 @endsection

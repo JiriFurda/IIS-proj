@@ -5,7 +5,7 @@
 
 	<h2>Informace:</h2>
 	<ul>
-		<li>Adresa: {{ $branch->name }}</li>
+		<li>Adresa: {{ $branch->address }}</li>
 	</ul>
 
 	<h2>Sklad:</h2>

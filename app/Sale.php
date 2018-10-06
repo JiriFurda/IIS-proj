@@ -13,7 +13,7 @@ class Sale extends Model
 	// --- Eloquent relationships ---
     public function branch()
     {
-        return $this->belongsToOne(Branch::class);
+        return $this->belongsTo(Branch::class);
     }
 
     public function medicines()
@@ -43,6 +43,18 @@ class Sale extends Model
     public function getNameAttribute()
     {
         return '#'.$this->id;
+    }
+
+    public function getOverallPriceAttribute()
+    {
+        $sum = 0;
+
+        foreach ($this->medicines as $medicine)
+        {
+            $sum += $medicine->pivot->price_per_item * $medicine->pivot->quantity;
+        }
+
+        return $sum;
     }
 
 

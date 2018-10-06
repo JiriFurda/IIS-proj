@@ -16,6 +16,7 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('branch_id');
+            $table->unsignedInteger('user_id');
             $table->string('customer_name');
             $table->timestamp('created_at')->useCurrent();
 
@@ -24,6 +25,7 @@ class CreateReservationsTable extends Migration
 
 
             $table->foreign('branch_id')->references('id')->on('branches');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
