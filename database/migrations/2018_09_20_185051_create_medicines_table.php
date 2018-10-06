@@ -17,7 +17,7 @@ class CreateMedicinesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->boolean('prescription');
-            $table->decimal('price', 5, 2);
+            $table->decimal('price', 7, 2);
         });
     }
 

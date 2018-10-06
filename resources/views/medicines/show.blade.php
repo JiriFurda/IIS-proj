@@ -20,6 +20,10 @@
 		<li>Nutnost předpisu: {{ $medicine->prescription ? 'Ano' : 'Ne' }}</li>
 	</ul>
 
+	@if(auth()->user()->isAuthorised('superior'))
+		<a href="{{ route('medicines.edit', $medicine) }}">Upravit</a>
+	@endif
+
 	<h2>Dostupnost:</h2>
 	Na této pobočce {{ Branch::current()->getQuantityInStock($medicine) }} ks
 

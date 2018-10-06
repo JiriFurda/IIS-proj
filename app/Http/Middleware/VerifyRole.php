@@ -16,7 +16,7 @@ class VerifyRole
     public function handle($request, Closure $next, $requiredRole)
     {
         if(!auth()->user()->isAuthorised($requiredRole))
-            abort(500, 'Na zobrazení této stránky nemáte dostatečná oprávnění.');
+            abort(401, 'Na zobrazení této stránky nemáte dostatečná oprávnění.');
 
         return $next($request);
     }
