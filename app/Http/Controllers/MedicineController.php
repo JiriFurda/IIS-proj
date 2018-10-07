@@ -9,7 +9,9 @@ class MedicineController extends Controller
 {
     public function index()
     {
-    	return view('medicines.index');
+        $medicines = Medicine::all();
+
+    	return view('medicines.index', compact('medicines'));
     }
 
     public function show(Medicine $medicine)

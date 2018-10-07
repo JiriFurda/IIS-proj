@@ -12,7 +12,9 @@ class SaleController extends Controller
 {
     public function index()
     {
-        return view('sales.index');
+        $sales = Sale::all();
+
+        return view('sales.index', compact('sales'));
     }
 
 

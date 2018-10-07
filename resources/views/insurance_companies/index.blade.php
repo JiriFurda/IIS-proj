@@ -2,11 +2,15 @@
 
 @section('content')
 	<h1>Pojišťovny v databázi:</h1>
-	<ul>
-		@foreach(InsuranceCompany::all() as $insuranceCompany)
-			<li>
-				{!! $insuranceCompany->nameLink() !!}
-			</li>
-		@endforeach
-	</ul>
+	@if(empty($insuranceComapnies))
+		<p>V databázi nejsou žádné pojišťovny.</p>
+	@else
+		<ul>
+			@foreach($insuranceComapnies as $insuranceCompany)
+				<li>
+					{!! $insuranceCompany->nameLink() !!}
+				</li>
+			@endforeach
+		</ul>
+	@endif
 @endsection

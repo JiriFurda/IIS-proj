@@ -5,12 +5,17 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Léky v databázi:</h1>
-	<ul>
-		@foreach(Sale::all() as $sale)
-			<li>
-				{!! $sale->nameLink() !!}
-			</li>
-		@endforeach
-	</ul>
+	<h1>Prodeje v databázi:</h1>
+
+	@if(empty($sales))
+		<p>V databázi nejsou žádné pobočky.</p>
+	@else
+		<ul>
+			@foreach($sales as $sale)
+				<li>
+					{!! $sale->nameLink() !!}
+				</li>
+			@endforeach
+		</ul>
+	@endif
 @endsection

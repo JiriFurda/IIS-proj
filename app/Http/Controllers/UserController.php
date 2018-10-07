@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\InsuranceCompany;
+use App\User;
 
-class InsuranceComapnyController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-    	return view('insurance_companies.index', compact('insuranceCompanies'));
+    	return view('users.index');
     }
 
     public function show(InsuranceCompany $insuranceCompany)

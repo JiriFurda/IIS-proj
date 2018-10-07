@@ -19,7 +19,7 @@ class CreateMedicineSupplierPivotTable extends Migration
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->primary(['medicine_id', 'supplier_id']);
             
-            $table->unsignedDecimal('price', 5, 2);
+            $table->unsignedDecimal('price', 7, 2);
         });
     }
 
