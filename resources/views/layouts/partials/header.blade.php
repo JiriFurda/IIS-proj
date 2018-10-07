@@ -66,9 +66,11 @@
 				<li>
 					<a href="{{ route('suppliers.index') }}">Dodavatelé</a>
 				</li>
-				<li>
-					<a href="#">//Uživatelé</a>
-				</li>
+				@if(auth()->user()->isAuthorised('superior'))
+					<li>
+						<a href="#">Uživatelé</a> {{-- @todo No idea why {{ route('users.index') }} is not working --}}
+					</li>
+				@endif
 			</ul>
 		</nav>
 		<!-- Navigation menu section end -->

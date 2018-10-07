@@ -48,6 +48,10 @@ Route::get('/suppliers/{supplier}', 'SupplierController@show')->name('suppliers.
 Route::get('/reservations/create', 'ReservationController@create')->name('reservations.create');
 Route::post('/reservations/store', 'ReservationController@store')->name('reservations.store');
 
+Route::get('/users', 'UserController@index')->name('users.index')->middleware('role:superior');
+Route::get('/users', 'UserController@create')->name('users.create')->middleware('role:superior');
+Route::post('/users', 'UserController@store')->name('users.store')->middleware('role:superior');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -19,6 +19,13 @@ class Role extends Model
     // ---
     public function searchInHiearchy($searched)
     {
+        // Find out searched internal_name
+        if(gettype($searched) == 'object')
+            if(get_class($searched) == self::class)
+                $searched = $searched->internal_name;
+            else
+                abort(500, 'Role::searchInHiearchy(): Invalid input given');
+
     	// Check if this Role is the searched one -> search succeed
         if($this->internal_name == $searched)
             return true;
