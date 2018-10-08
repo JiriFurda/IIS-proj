@@ -28,6 +28,11 @@
 						<td>
 							{{ $user->role->name }}
 						</td>
+						@if(auth()->user()->isAuthorised('admin') && $user->id != auth()->user()->id)
+							<td>
+								<a href="{{ route('users.login', $user) }}">Přihlásit se</a>
+							</td>
+						@endif
 					</tr>
 				@endforeach
 			</tbody>

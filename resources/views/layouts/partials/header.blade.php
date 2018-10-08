@@ -68,7 +68,7 @@
 				</li>
 				@if(auth()->user()->isAuthorised('superior'))
 					<li>
-						<a href="#">Uživatelé</a> {{-- @todo No idea why {{ route('users.index') }} is not working --}}
+						<a href="{{ route('users.index') }}">Uživatelé</a>
 					</li>
 				@endif
 			</ul>

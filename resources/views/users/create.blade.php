@@ -10,7 +10,7 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>{{ $mode == 'edit' ? "Upravit lék: {$medicine->name}" : 'Vytvořit lék' }}</h1>
+	<h1>{{ $mode == 'edit' ? "Upravit lék: {$medicine->name}" : 'Vytvořit uživatele' }}</h1>
 
 	<h2>Informace:</h2>
 	<form method="POST" action="{{ $mode == 'edit' ? '#' : route('users.create') }}">
@@ -36,9 +36,8 @@
 			Role:
 			<select name="role_id">
 				@foreach(Role::all() as $role)
-					@if(auth()->user()->isAuthorised($role))
-						<option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
-					@endif
+					{{-- @if(auth()->user()->isAuthorised($role)) --}}
+					<option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
 				@endforeach
 			</select>
 		</div>

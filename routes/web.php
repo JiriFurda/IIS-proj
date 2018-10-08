@@ -16,7 +16,7 @@
 
 
 
-Route::get('/', 'MedicineController@index');
+Route::get('/', 'MedicineController@index')->name('home');
 
 Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
 Route::get('/medicines/create', 'MedicineController@create')->name('medicines.create')->middleware('role:superior');
@@ -49,9 +49,8 @@ Route::get('/reservations/create', 'ReservationController@create')->name('reserv
 Route::post('/reservations/store', 'ReservationController@store')->name('reservations.store');
 
 Route::get('/users', 'UserController@index')->name('users.index')->middleware('role:superior');
-Route::get('/users', 'UserController@create')->name('users.create')->middleware('role:superior');
-Route::post('/users', 'UserController@store')->name('users.store')->middleware('role:superior');
+Route::get('/users/create', 'UserController@create')->name('users.create')->middleware('role:superior');
+Route::post('/users/create', 'UserController@store')->name('users.store')->middleware('role:superior');
+Route::get('/users/{user}/login', 'UserController@login')->name('users.login')->middleware('role:admin');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
