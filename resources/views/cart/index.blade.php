@@ -53,10 +53,11 @@
 					@endforeach
 				</tbody>
 			</table>
-			Celkem: X Kč
+			Celkem: @todo Kč
 			<button type="submit">Upravit množství</button>
 			<a href="{{ route('sales.store') }}">Dokončit nákup</a>
+			{{-- @todo if medicine out of stock <a href="route('reservations.index')">Vytvorit rezervaci</a>--}}
 		</form>
-		{{ $errors }}
+	
 	@endif
 @endsection

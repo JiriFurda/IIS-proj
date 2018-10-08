@@ -52,5 +52,6 @@ Route::get('/users', 'UserController@index')->name('users.index')->middleware('r
 Route::get('/users/create', 'UserController@create')->name('users.create')->middleware('role:superior');
 Route::post('/users/create', 'UserController@store')->name('users.store')->middleware('role:superior');
 Route::get('/users/{user}/login', 'UserController@login')->name('users.login')->middleware('role:admin');
+Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 
 Auth::routes();

@@ -63,4 +63,9 @@ class UserController extends Controller
     	
     	return redirect()->route('home');
     }
+
+    public function edit(User $user)
+    {
+    	dd('@todo');
+    }
 }

@@ -23,10 +23,12 @@
 				<input type="text" name="customer_name" placeholder="Vyplňte jméno zákazníka">
 			</div>
 
+			<!--
 			<div>
 				Pobočka:
 				@include('partials.branch_select', ['selected' => old('branch_id', Branch::current())])
 			</div>
+			-->
 
 			<table>
 				<thead>
@@ -42,10 +44,9 @@
 								{!! $cartItem->medicine->nameLink() !!}
 							</td>
 							<td>
-								{{-- @todo error class when $cartItem->verifyStock() == false --}}
 								<input type="number"
 									name="medicines_quantity[{{ $cartItem->medicine->id }}]"
-									value="{{ $cartItem->quantity }}"
+									value="{{ old("medicines_quantity[{$cartItem->medicine->id}]", $cartItem->quantity - Branch::current()->getQuantityInStock($cartItem->medicine)) }}"	{{-- Value sent before or amount that is not in stock --}}
 									min=0>
 								ks
 							</td>
@@ -53,8 +54,7 @@
 					@endforeach
 				</tbody>
 			</table>
-			<button type="submit">Vytvořit objenávku</button>
+			<button type="submit">Vytvořit rezervaci</button>
 		</form>
-		{{ $errors }}
 	@endif
 @endsection

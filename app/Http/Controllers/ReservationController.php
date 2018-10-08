@@ -7,6 +7,7 @@ use App\Rules\KeyIsID;
 use App\Rules\KeyUnique;
 use App\Medicine;
 use App\Reservation;
+use App\Branch;
 
 class ReservationController extends Controller
 {
@@ -27,21 +28,28 @@ class ReservationController extends Controller
 		    'medicines_quantity'  => [
 		    	'required',
 		    	'array',
-		    	'min:1',
+		    	'min:0',
 		    	new KeyIsID(Medicine::class),
 		    	new KeyUnique
 		    ]
 		]);
-
-		dd('valid');
-
     	
     	$reservation = Reservation::create([
             'customer_name' => request('customer_name'),
-            'branch_id' => request('branch_id'),
+            'branch_id' => Branch::current()->id,
             'user_id' => auth()->id(),
         ]);
 
-        
+        foreach(request()->input('medicines_quantity') as $medicineId => $medicineQuantity)
+        {
+            if($medicineQuantity == 0)
+                continue;
+
+            $reservation->medicines()->attach($medicineId, ['quantity_reserved' => $medicineQuantity]);
+        }
+
+        session()->flash('alert-success', "Rezervace byla úspěšně vytvořena");
+
+        return redirect()->route('reservations.index');       
     }
 }

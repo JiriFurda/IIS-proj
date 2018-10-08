@@ -8,6 +8,7 @@ class Reservation extends Model
 {
     // --- Laravel settings ---
 	public $timestamps = false;
+    protected $fillable = ['customer_name', 'branch_id', 'user_id'];
 
     // --- Eloquent relationships ---
     public function branch()
@@ -22,7 +23,13 @@ class Reservation extends Model
 
     public function medicines()
     {
-        return $this->belongsToMany(Supplier::class)->withPivot('quantity');
+        return $this->belongsToMany(Medicine::class)->withPivot('quantity_reserved', 'quantity_picked_up');
+    }
+
+    // --- Accessors ---
+    public function getCompletedAttribute()
+    {
+        return !is_null($this->completed_at);
     }
 
 }

@@ -13,7 +13,9 @@
 		<ul>
 			@foreach($branches as $branch)
 				<li>
+					{!! $branch == Branch::current() ? '<b>' : '' !!}
 					{!! $branch->nameLink() !!}
+					{!! $branch == Branch::current() ? '</b>' : '' !!}
 				</li>
 			@endforeach
 		</ul>

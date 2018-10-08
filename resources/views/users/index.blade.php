@@ -17,6 +17,9 @@
 				<tr>
 					<th>Jméno uživatele</th>
 					<th>Role</th>
+					@if(auth()->user()->isAuthorised('admin'))
+						<th colspan="2">Akce</th>
+					@endif
 				</tr>
 			</thead>
 			<tbody>
@@ -28,10 +31,15 @@
 						<td>
 							{{ $user->role->name }}
 						</td>
-						@if(auth()->user()->isAuthorised('admin') && $user->id != auth()->user()->id)
+						@if(auth()->user()->isAuthorised('admin'))
 							<td>
-								<a href="{{ route('users.login', $user) }}">Přihlásit se</a>
+								<a href="{{ route('users.edit', $user) }}" title="Upravit uživatele">Upravit</a>
 							</td>
+							@if($user->id != auth()->user()->id)
+							<td>
+								<a href="{{ route('users.login', $user) }}" title="Přihlásit se jako uživatel">Přihlásit se</a>
+							</td>
+							@endif
 						@endif
 					</tr>
 				@endforeach

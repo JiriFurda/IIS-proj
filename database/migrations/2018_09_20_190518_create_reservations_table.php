@@ -20,7 +20,7 @@ class CreateReservationsTable extends Migration
             $table->string('customer_name');
             $table->timestamp('created_at')->useCurrent();
 
-            $table->boolean('completed')->default(false);
+            //$table->boolean('completed')->default(false);
             $table->timestamp('completed_at')->nullable();
 
 
