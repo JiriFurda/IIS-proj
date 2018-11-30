@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BranchMedicinePivotTableSeeder::class);
         $this->call(MedicineSupplierPivotTableSeeder::class);
+        $this->call(SalesTableSeeder::class);
     }
 }
