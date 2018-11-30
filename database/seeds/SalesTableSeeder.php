@@ -24,6 +24,9 @@ class SalesTableSeeder extends Seeder
         $cartItems[] = new CartItem(Medicine::find(1), 1);
         $cartItems[] = new CartItem(Medicine::find(2), 1);
 
-        Branch::first()->addSale(['user_id' => User::first()->id], $cartItems);
+        Branch::first()->addSale([
+            'user_id' => User::first()->id,
+            'confirmed' => true,
+        ], $cartItems);
     }
 }

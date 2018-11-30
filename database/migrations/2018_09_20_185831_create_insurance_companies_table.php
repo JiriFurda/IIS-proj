@@ -15,6 +15,7 @@ class CreateInsuranceCompaniesTable extends Migration
     {
         Schema::create('insurance_companies', function (Blueprint $table) {
 			$table->increments('id'); // @todo Temporary - should be number of the insurance company
+            $table->smallInteger('code')->unsigned();
 			$table->string('name');
 			
 			//$table->primary('id');

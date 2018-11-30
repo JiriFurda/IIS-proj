@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class InsuranceCompany extends Model
 {
+    // --- Laravel settings ---
+    protected $guarded = ['id'];
+    public $timestamps = false;
+
 	// --- Getters ---
     public function nameLink()
     {
