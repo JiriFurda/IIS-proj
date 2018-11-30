@@ -41,21 +41,7 @@ class SaleController extends Controller
     		return back();
     	}
 
-    	$sale = $branch->addSale(['user_id' => auth()->user()->id]);
-
-    	foreach(Cart::items() as $cartItem)
-    	{           
-            $sale->medicines()->attach($cartItem->medicine->id,
-                [
-                    'quantity' => $cartItem->quantity,
-                    'price_per_item' => $cartItem->medicine->price
-                ]);
-
-    		$cartItem->medicine->decreaseAmountInBranch($branch, $cartItem->quantity);
-
-            // @todo Critical part! Throw + catch and revert whole sale if something goes wrong
-            // Or save it after everything is done? :O
-    	}
+    	$sale = $branch->addSale(['user_id' => auth()->user()->id], Cart::items());
 
     	Cart::earse();
 

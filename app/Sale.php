@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     // --- Laravel settings ---
-    protected $fillable = ['user_id'];
+    protected $guarded = ['id'];
 
 
 	// --- Eloquent relationships ---
@@ -49,7 +49,7 @@ class Sale extends Model
     {
         $sum = 0;
 
-        foreach ($this->medicines as $medicine)
+        foreach($this->medicines as $medicine)
         {
             $sum += $medicine->pivot->price_per_item * $medicine->pivot->quantity;
         }
