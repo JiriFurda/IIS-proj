@@ -61,7 +61,7 @@
 					<a href="{{ route('branches.index') }}">Pobočky</a>
 				</li>
 				<li>
-					<a href="#">//Pojiťovny</a>
+					<a href="{{ route('insurance_companies.index') }}">Pojiťovny</a>
 				</li>
 				<li>
 					<a href="{{ route('suppliers.index') }}">Dodavatelé</a>

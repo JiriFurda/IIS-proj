@@ -9,6 +9,7 @@ class InsuranceComapnyController extends Controller
 {
     public function index()
     {
+        $insuranceCompanies = InsuranceCompany::all();
     	return view('insurance_companies.index', compact('insuranceCompanies'));
     }
 
