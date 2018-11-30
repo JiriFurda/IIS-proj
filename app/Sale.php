@@ -26,6 +26,11 @@ class Sale extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function insuranceCompany()
+    {
+        return $this->belongsTo(InsuranceCompany::class);
+    }
+
 
     // --- Getters ---
     public function nameLink()
@@ -55,6 +60,11 @@ class Sale extends Model
         }
 
         return $sum;
+    }
+
+    public function getPrescriptedAttribute()
+    {
+        return $this->customer_nin && $this->insuranceCompany;
     }
 
 

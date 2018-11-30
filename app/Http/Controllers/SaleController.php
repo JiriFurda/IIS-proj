@@ -23,10 +23,8 @@ class SaleController extends Controller
     	return view('sales.show', compact('sale'));
     }
 
-    public function store()
+    public function store($presriptionValiadated = false)
     {
-    	$branch = Branch::current();
-
     	if(Cart::isEmpty())
     	{
     		session()->flash('alert-error', 'S prázným košíkem nelze vytvořit prodej.');
@@ -41,11 +39,39 @@ class SaleController extends Controller
     		return back();
     	}
 
-    	$sale = $branch->addSale(['user_id' => auth()->user()->id], Cart::items());
+    	if(Cart::hasPrescriptedMedicine())
+        {
+            if(!$presriptionValiadated)
+                return redirect()->route('sales.create_prescripted');
+
+            $sale = Branch::current()->addSale([
+                'user_id' => auth()->user()->id,
+                'customer_nin' => request()->input('customer_nin'),
+                'insurance_company_id' => request()->input('insurance_company_id'),
+                ], Cart::items());
+        }
+        else
+    	    $sale = Branch::current()->addSale(['user_id' => auth()->user()->id], Cart::items());
 
     	Cart::earse();
 
     	return redirect()->route('sales.show', $sale);
+    }
+
+    public function createPrescripted()
+    {
+        return view('sales.create_prescripted');
+    }
+
+    public function storePrescripted()
+    {
+        $this->validate(request(),
+            [
+                'customer_nin' => 'required',   // @todo regex check
+                'insurance_company_id' => 'required|exists:insurance_companies,id',
+            ]);
+
+        return self::store(true);
     }
 
     public function confirm(Sale $sale)

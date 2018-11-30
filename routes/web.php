@@ -33,6 +33,8 @@ Route::get('/cart/{medicine}/delete', 'CartController@delete')->name('cart.delet
 
 Route::get('/sales', 'SaleController@index')->name('sales.index');
 Route::get('/sales/store', 'SaleController@store')->name('sales.store');
+Route::get('/sales/create_prescripted', 'SaleController@createPrescripted')->name('sales.create_prescripted');
+Route::post('/sales/store_prescripted', 'SaleController@storePrescripted')->name('sales.store_prescripted');
 Route::get('/sales/{sale}', 'SaleController@show')->name('sales.show');
 Route::get('/sales/{sale}/confirm', 'SaleController@confirm')->name('sales.confirm');
 

@@ -45,7 +45,14 @@
 			@endforeach
 		</tbody>
 	</table>
-
 	Celková cena: <b>{{ $sale->overall_price }} Kč</b>
+
+    @if($sale->prescripted)
+        <h2>Informace o prodeji na předpis</h2>
+        <ul>
+            <li>Rodné číslo zákazníka: {{ $sale->customer_nin }}</li>
+            <li>Pojišťovna: {!! $sale->insuranceCompany->nameLink() !!}</li>
+        </ul>
+    @endif
 
 @endsection
