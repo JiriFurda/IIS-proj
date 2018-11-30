@@ -17,13 +17,15 @@ class CreateSalesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('branch_id');
             $table->unsignedInteger('user_id');
-            //$table->unsignedBigInteger('customer_nin', 10)->nullable();
+            $table->unsignedInteger('insurance_company_id')->nullable();
+            $table->bigInteger('customer_nin')->unsigned()->nullable();
             $table->timestamps();
             $table->timestamp('confirmed_at')->nullable();
             $table->boolean('confirmed')->default(false);
 
             $table->foreign('branch_id')->references('id')->on('branches');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('insurance_company_id')->references('id')->on('insurance_companies');
         });
     }
 
