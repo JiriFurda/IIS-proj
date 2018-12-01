@@ -6,7 +6,7 @@
 
 @section('content')
 	<h1>Dodavatelé v databázi:</h1>
-	@if(empty($sales))
+	@if(empty($suppliers))
 		<p>V databázi nejsou žádní dodavatelé.</p>
 	@else
 		<ul>
