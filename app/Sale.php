@@ -18,7 +18,7 @@ class Sale extends Model
 
     public function medicines()
     {
-        return $this->belongsToMany(Medicine::class)->withPivot('quantity', 'price_per_item');
+        return $this->belongsToMany(Medicine::class)->withPivot('quantity', 'price_per_item', 'insurance_contribution_per_item');
     }
 
     public function user()
@@ -53,10 +53,25 @@ class Sale extends Model
     public function getOverallPriceAttribute()
     {
         $sum = 0;
-
         foreach($this->medicines as $medicine)
         {
             $sum += $medicine->pivot->price_per_item * $medicine->pivot->quantity;
+        }
+
+        return $sum;
+    }
+
+    public function getOverallCustomerPriceAttribute()
+    {
+        if(!$this->prescripted)
+            return $this->overall_price;
+
+        $sum = 0;
+        foreach($this->medicines as $medicine)
+        {
+            $contribution = $medicine->pivot->insurance_contribution_per_item;
+            $contribution = ($contribution ? $contribution : 0);
+            $sum += ($medicine->pivot->price_per_item - $contribution) * $medicine->pivot->quantity;
         }
 
         return $sum;

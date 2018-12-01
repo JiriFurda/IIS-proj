@@ -23,6 +23,9 @@
 				<th>Název léku</th>
 				<th>Množství</th>
 				<th>Cena za kus</th>
+                @if($sale->prescripted)
+                    <th>Hrazeno za kus</th>
+                @endif
 				<th>Cena</th>
 			</tr>
 		</thead>
@@ -38,6 +41,15 @@
 					<td>
 						{{ $medicine->pivot->price_per_item }} Kč / ks
 					</td>
+                    @if($sale->prescripted)
+                        <td>
+                            @if($medicine->pivot->insurance_contribution_per_item )
+                                {{ $medicine->pivot->insurance_contribution_per_item }} Kč / ks
+                            @else
+                                -
+                            @endif
+                        </td>
+                    @endif
 					<td>
 						<b>{{ $medicine->overall_price }} Kč</b>
 					</td>
@@ -46,6 +58,10 @@
 		</tbody>
 	</table>
 	Celková cena: <b>{{ $sale->overall_price }} Kč</b>
+    @if($sale->prescripted)
+        <br>
+        Cena pro zákazníka: <b>{{ $sale->overall_customer_price }} Kč</b>
+    @endif
 
     @if($sale->prescripted)
         <h2>Informace o prodeji na předpis</h2>
