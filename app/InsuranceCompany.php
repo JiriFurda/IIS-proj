@@ -10,6 +10,12 @@ class InsuranceCompany extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
+    // --- Eloquent relationships ---
+    public function sales()
+    {
+        return $this->HasMany(Sale::class);
+    }
+
 	// --- Getters ---
     public function nameLink()
     {
