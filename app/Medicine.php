@@ -21,6 +21,11 @@ class Medicine extends Model
         return $this->belongsToMany(Supplier::class)->withPivot('price');
     }
 
+    public function insuranceCompanies()
+    {
+        return $this->belongsToMany(InsuranceCompany::class)->withPivot('amount');
+    }
+
     /*
     public function sales()
     {
