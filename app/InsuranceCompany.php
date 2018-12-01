@@ -16,6 +16,11 @@ class InsuranceCompany extends Model
         return $this->HasMany(Sale::class);
     }
 
+    public function medicines()
+    {
+        return $this->belongsToMany(Medicine::class)->withPivot('amount');
+    }
+
 	// --- Getters ---
     public function nameLink()
     {

@@ -51,7 +51,11 @@ Route::middleware('auth')->group(function () {
 
     // Insruance comapnies
     Route::get('/insurance_companies', 'InsuranceComapnyController@index')->name('insurance_companies.index');
-    Route::get('/insurance_companies/{insuranceCompany}', 'InsuranceComapnyController@show')->name('insurance_companies.show');
+    Route::middleware('role:superior')->group(function () {
+        Route::get('/insurance_companies/{insuranceCompany}/sales', 'InsuranceComapnyController@sales')->name('insurance_companies.sales');
+        Route::get('/insurance_companies/{insuranceCompany}/contributions/edit', 'InsuranceComapnyController@contributionsEdit')->name('insurance_companies.contributions.edit');
+        Route::post('/insurance_companies/{insuranceCompany}/contributions/update', 'InsuranceComapnyController@contributionsUpdate')->name('insurance_companies.contributions.update');
+    });
 
     // Suppliers
     Route::get('/suppliers', 'SupplierController@index')->name('suppliers.index');
