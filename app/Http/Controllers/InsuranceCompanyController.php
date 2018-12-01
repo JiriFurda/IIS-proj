@@ -9,6 +9,7 @@ use App\InsuranceCompany;
 use App\Medicine;
 use App\Rules\KeyIsID;
 use App\Rules\KeyUnique;
+use Validator;
 
 class InsuranceComapnyController extends Controller
 {
@@ -20,8 +21,22 @@ class InsuranceComapnyController extends Controller
 
     public function sales(InsuranceCompany $insuranceCompany)
     {
-        $from = request('from', Carbon::now()->subMonth());
-        $to = request('to', Carbon::now());
+        $validator = Validator::make(request()->all(), [
+            'from' => 'nullable|date',
+            'to' => 'nullable|date',
+        ]);
+        if ($validator->fails())
+        {
+            $parameters[] = $insuranceCompany;
+            if(!$validator->errors()->has('from'))
+                $parameters['from'] = request('from');
+            if(!$validator->errors()->has('to'))
+                $parameters['to'] = request('to');
+            return redirect()->route('insurance_companies.sales', $parameters)->withErrors($validator); // Not exactly the smartest solution
+        }
+
+        $from = Carbon::parse(request('from', Carbon::now()->subMonth()));
+        $to = Carbon::parse(request('to', Carbon::now()));
 
         $sales = $insuranceCompany->sales()->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])->get();
         /*PageView::select('id', 'title', 'created_at')
