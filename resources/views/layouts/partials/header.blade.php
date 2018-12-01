@@ -6,74 +6,110 @@
 @auth
 	<header>
 
-		<!-- User detail section start -->
-	    <div>
-	    	<b>{{ auth()->user()->name }}</b> -
-	   
-	    
-		    <a href="{{ route('logout') }}"
-		       onclick="event.preventDefault();
-		                     document.getElementById('logout-form').submit();">
-		        {{ __('Odhlásit se') }}
-		    </a>
-		    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-		        @csrf
-	    	</form>
-	    </div>
-	    <!-- User detail section end -->
+        <div class="container-fluid" style="background-color:#1F2631;">
+            <div class="row">
+                <div class="col-sm-10">
+                    <ul class="my-ul">
+                        <li>
+                            <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-danger btn-sm">Léky</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-danger btn-sm">Rezervace</button></a>
+                        <li>
+                            <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-danger btn-sm">Prodeje</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-danger btn-sm">Pobočky</button></a>
+                        </li>
+                        <li>
+                            <a href="#"><button type="button" class="btn btn-danger btn-sm">//Pojišťovny</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-danger btn-sm">Dodavatelé</button></a>
+                        </li>
+                        @if(auth()->user()->isAuthorised('superior'))
+                            <li>
+                                <a href="{{ route('users.index') }}"><button type="button" class="btn btn-danger btn-sm">Uživatelé</button></a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+
+            <!-- User detail section start -->
+                <div class="col-sm-2">
+                    <b>{{ auth()->user()->name }}</b> -
+
+
+                    <a class="btn-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Odhlásit se') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
+                    <!-- User detail section end -->
 
 
 
-	    <div>
-	    	<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>
-	    	<div>Role: {{ auth()->user()->role->name }}</div>
-	    </div>
+                    <div>
+                        <!--<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>-->
+                        <div>Role: {{ auth()->user()->role->name }}</div>
+                    </div>
 
 
 
-	    <!-- Cart summary section start -->
-		<div>
-			@if(!Cart::isEmpty())
-				<a href="{{ route('cart.index') }}" title="Košík">{{ Cart::count() }} položek</a>
-			@else
-				Košík je prázdný
-			@endif
-		</div>
-		<!-- Cart summary section end -->
+                    <!-- Cart summary section start -->
+                    <div>
+                        @if(!Cart::isEmpty())
+                            <a href="{{ route('cart.index') }}" title="Košík">{{ Cart::count() }} položek</a>
+                        @else
+                            Košík je prázdný
+                        @endif
+                    </div>
 
+                </div>
+                <!-- Cart summary section end -->
+
+
+
+            </div>
+
+        </div>
 		<hr>
 		
 		<!-- Navigation menu section start -->
 		<!--<nav>
 			Menu:-->
 
-        <div>
+      <!--  <div>
             Menu
 			<ul class="my-ul">
                 <li>
-                    <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-primary btn-xs">Léky</button></a>
+                    <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-danger btn-sm">Léky</button></a>
                 </li>
 				<li>
-                    <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-primary btn-xs">Rezervace</button></a>
+                    <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-danger btn-sm">Rezervace</button></a>
                 <li>
-                    <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-primary btn-xs">Prodeje</button></a>
+                    <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-danger btn-sm">Prodeje</button></a>
 				</li>
 				<li>
-                    <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-primary btn-xs">Pobočky</button></a>
+                    <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-danger btn-sm">Pobočky</button></a>
 				</li>
 				<li>
-                    <a href="#"><button type="button" class="btn btn-primary btn-xs">//Pojišťovny</button></a>
+                    <a href="#"><button type="button" class="btn btn-danger btn-sm">//Pojišťovny</button></a>
 				</li>
 				<li>
-                    <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-primary btn-xs">Dodavatelé</button></a>
+                    <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-danger btn-sm">Dodavatelé</button></a>
 				</li>
 				@if(auth()->user()->isAuthorised('superior'))
 					<li>
-                        <a href="{{ route('users.index') }}"><button type="button" class="btn btn-primary btn-xs">Uživatelé</button></a>
+                        <a href="{{ route('users.index') }}"><button type="button" class="btn btn-danger btn-sm">Uživatelé</button></a>
 					</li>
 				@endif
 			</ul>
-        </div>
+        </div>-->
 		<!--</nav> -->
 		<!-- Navigation menu section end -->
 

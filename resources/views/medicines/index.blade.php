@@ -5,13 +5,15 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Léky v databázi:</h1>
+    <div class="container-fluid">
+        <h1>Léky v databázi:</h1>
 
-	@if(auth()->user()->isAuthorised('superior'))
-        <div>
-            <a href="{{ route('medicines.create') }}"><button type="button">Přidat nový</button></a>
-        </div>
-	@endif
+        @if(auth()->user()->isAuthorised('superior'))
+            <div>
+                <a href="{{ route('medicines.create') }}"><button type="button" class="btn btn-success btn-lg">Přidat nový</button></a>
+            </div>
+        @endif
+    </div>
 
 	@if(empty($medicines))
 		<p>V databázi nejsou žádné léky.</p>

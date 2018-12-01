@@ -12,12 +12,13 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
-    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/common.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-    <style type="text/css">
+
+    <!--<style type="text/css">
         ul.my-ul {
             display: flex;
             flex-direction: row;
@@ -34,7 +35,7 @@
             padding-right: 10px;
         }
 
-    </style>
+    </style>-->
 
 
 </head>
