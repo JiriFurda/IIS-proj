@@ -23,7 +23,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/datepicker-cs.js') }}"></script>
         @stack('scripts')
     </body>
 </html>

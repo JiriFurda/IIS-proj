@@ -23,13 +23,15 @@ class InsuranceComapnyController extends Controller
         $from = request('from', Carbon::now()->subMonth());
         $to = request('to', Carbon::now());
 
-        $sales = $insuranceCompany->sales()->whereBetween('created_at', [$from, $to])->get();
+        $sales = $insuranceCompany->sales()->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])->get();
         /*PageView::select('id', 'title', 'created_at')
         ->get()
         ->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('Y'); // grouping by years
             //return Carbon::parse($date->created_at)->format('m'); // grouping by months
         });*/
+        $from = $from->format('d.m.Y');
+        $to = $to->format('d.m.Y');
     	return view('insurance_companies.sales', compact('insuranceCompany', 'from', 'to', 'sales'));
     }
 
