@@ -44,35 +44,37 @@
 		<hr>
 		
 		<!-- Navigation menu section start -->
-		<nav>
-			Menu:
+		<!--<nav>
+			Menu:-->
 
-			<ul>
+        <div>
+            Menu
+			<ul class="my-ul">
+                <li>
+                    <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-primary btn-xs">Léky</button></a>
+                </li>
 				<li>
-					<a href="{{ route('medicines.index') }}">Léky</a>
+                    <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-primary btn-xs">Rezervace</button></a>
+                <li>
+                    <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-primary btn-xs">Prodeje</button></a>
 				</li>
 				<li>
-					<a href="#">//Rezervace</a>
+                    <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-primary btn-xs">Pobočky</button></a>
 				</li>
 				<li>
-					<a href="{{ route('sales.index') }}">Prodeje</a>
+                    <a href="#"><button type="button" class="btn btn-primary btn-xs">//Pojišťovny</button></a>
 				</li>
 				<li>
-					<a href="{{ route('branches.index') }}">Pobočky</a>
-				</li>
-				<li>
-					<a href="#">//Pojiťovny</a>
-				</li>
-				<li>
-					<a href="{{ route('suppliers.index') }}">Dodavatelé</a>
+                    <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-primary btn-xs">Dodavatelé</button></a>
 				</li>
 				@if(auth()->user()->isAuthorised('superior'))
 					<li>
-						<a href="{{ route('users.index') }}">Uživatelé</a>
+                        <a href="{{ route('users.index') }}"><button type="button" class="btn btn-primary btn-xs">Uživatelé</button></a>
 					</li>
 				@endif
 			</ul>
-		</nav>
+        </div>
+		<!--</nav> -->
 		<!-- Navigation menu section end -->
 
 		<hr>

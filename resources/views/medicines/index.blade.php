@@ -8,7 +8,9 @@
 	<h1>Léky v databázi:</h1>
 
 	@if(auth()->user()->isAuthorised('superior'))
-		<a href="{{ route('medicines.create') }}">Přidat nový</a>
+        <div>
+            <a href="{{ route('medicines.create') }}"><button type="button">Přidat nový</button></a>
+        </div>
 	@endif
 
 	@if(empty($medicines))
