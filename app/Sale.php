@@ -32,6 +32,13 @@ class Sale extends Model
     }
 
 
+    // --- Scopes ---
+    public function scopeConfirmed($query)
+    {
+        return $query->where('confirmed', true);
+    }
+
+
     // --- Getters ---
     public function nameLink()
     {
@@ -72,6 +79,22 @@ class Sale extends Model
             $contribution = $medicine->pivot->insurance_contribution_per_item;
             $contribution = ($contribution ? $contribution : 0);
             $sum += ($medicine->pivot->price_per_item - $contribution) * $medicine->pivot->quantity;
+        }
+
+        return $sum;
+    }
+
+    public function getOverallInsurancePriceAttribute()
+    {
+        if(!$this->prescripted)
+            return $this->overall_price;
+
+        $sum = 0;
+        foreach($this->medicines as $medicine)
+        {
+            $contribution = $medicine->pivot->insurance_contribution_per_item;
+            $contribution = ($contribution ? $contribution : 0);
+            $sum += $contribution * $medicine->pivot->quantity;
         }
 
         return $sum;

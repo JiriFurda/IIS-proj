@@ -9,7 +9,9 @@ use App\InsuranceCompany;
 use App\Medicine;
 use App\Rules\KeyIsID;
 use App\Rules\KeyUnique;
+use Illuminate\Support\Facades\App;
 use Validator;
+use DB;
 
 class InsuranceComapnyController extends Controller
 {
@@ -38,16 +40,45 @@ class InsuranceComapnyController extends Controller
         $from = Carbon::parse(request('from', Carbon::now()->subMonth()));
         $to = Carbon::parse(request('to', Carbon::now()));
 
-        $sales = $insuranceCompany->sales()->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])->get();
-        /*PageView::select('id', 'title', 'created_at')
-        ->get()
-        ->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('Y'); // grouping by years
-            //return Carbon::parse($date->created_at)->format('m'); // grouping by months
-        });*/
+        /*
+        $saleIds = $insuranceCompany->sales()
+            ->confirmed()
+            ->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])
+            ->pluck('id');
+
+        dd(DB::table('medicine_sale')
+            ->whereIn('sale_id', $saleIds)
+            ->select('sale_id', DB::raw('SUM(insurance_contribution_per_item * quantity) as insurance_price'))
+            ->groupBy('sale_id')
+            ->get());
+         */
+
+        $sales = $insuranceCompany->sales()
+            ->confirmed()
+            ->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])
+            ->get();
+
+        $days = [];
+        foreach($sales as $sale)
+        {
+            if(!isset($days[Carbon::parse($sale->confirmed_at)->format('Y-m-d')]))
+                $days[Carbon::parse($sale->confirmed_at)->format('Y-m-d')] = $sale->overall_insurance_price;
+            else
+                $days[Carbon::parse($sale->confirmed_at)->format('Y-m-d')] += $sale->overall_insurance_price;
+        }
+        if(count($days))
+            ksort($days);
+
+        $sum = 0;
+        foreach($days as $day => $price)
+        {
+            $reports[] = ['date' => Carbon::parse($day)->format('d.m.Y'), 'price' => $price];
+            $sum += $price;
+        }
+
         $from = $from->format('d.m.Y');
         $to = $to->format('d.m.Y');
-    	return view('insurance_companies.sales', compact('insuranceCompany', 'from', 'to', 'sales'));
+    	return view('insurance_companies.sales', compact('insuranceCompany', 'from', 'to', 'reports', 'sum'));
     }
 
     public function contributionsEdit(InsuranceCompany $insuranceCompany)
