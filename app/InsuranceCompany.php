@@ -24,6 +24,7 @@ class InsuranceCompany extends Model
 	// --- Getters ---
     public function nameLink()
     {
-    	return '<a href="'.route('insurance_companies.show', $this).'" title="Detail pojišťovny">'.$this->name.' ('.$this->code.')</a>';
+        return $this->name.' ('.$this->code.')';
+    	//return '<a href="'.route('insurance_companies.show', $this).'" title="Detail pojišťovny">'.$this->name.' ('.$this->code.')</a>';
     }
 }
