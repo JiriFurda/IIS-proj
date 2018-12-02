@@ -53,7 +53,9 @@ Route::middleware('auth')->group(function () {
     // Branches
     Route::get('/branches', 'BranchController@index')->name('branches.index');
     Route::get('/branches/{branch}', 'BranchController@show')->name('branches.show');
-
+    Route::middleware('role:superior')->group(function () {
+        Route::get('/branches/{branch}/switch', 'BranchController@switch')->name('branches.switch');
+    });
     // Insruance comapnies
     Route::get('/insurance_companies', 'InsuranceComapnyController@index')->name('insurance_companies.index');
     Route::middleware('role:superior')->group(function () {

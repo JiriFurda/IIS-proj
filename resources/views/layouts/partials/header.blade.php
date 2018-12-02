@@ -66,9 +66,23 @@
                     <!-- User detail section end -->
 
 
-
                     <div class="text-truncate">
-                        <i class="fas fa-warehouse"></i> {!! Branch::current()->nameLink() !!}
+                        <i class="fas fa-warehouse"></i>
+
+                        @if(auth()->user()->isAuthorised('superior'))
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownBranchSwitch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Branch::current()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownBranchSwitch">
+                                <h6 class="dropdown-header">Změnit aktuální pobočku</h6>
+
+                                @foreach(Branch::all() as $branch)
+                                    <a class="dropdown-item" href="{{ route('branches.switch', $branch) }}">{{ $branch->name }}</a>
+                                @endforeach
+                            </div>
+                        @else
+                            {!! Branch::current()->nameLink() !!}
+                        @endif
                     </div>
 
 

@@ -81,6 +81,9 @@ class Branch extends Model
     // --- Static methods ---
     public static function current()
     {
-        return Branch::first(); // @todo dummy result
+        if(auth()->user() && ($branch = auth()->user()->branch))
+            return $branch;
+
+        return Branch::first();
     }
 }
