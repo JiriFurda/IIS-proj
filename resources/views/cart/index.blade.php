@@ -23,8 +23,8 @@
                             <th>Počet kusů</th>
                             <th>Počet kusů skladem</th>
                             <th>Cena za kus</th>
-                            <th>Súčet</th>
-                            <th>Zrušiť</th>
+                            <th>Součet</th>
+                            <th>Odebrat</th>
 
                         </tr>
                     </thead>
@@ -49,7 +49,9 @@
                                     <b>{{ $cartItem->getPrice() }} Kč</b>
                                 </td>
                                 <td>
-                                    <a href="{{ route('cart.delete', $cartItem->medicine) }}">X</a>
+                                    <a href="{{ route('cart.delete', $cartItem->medicine) }}" title="Odebrat položku">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
