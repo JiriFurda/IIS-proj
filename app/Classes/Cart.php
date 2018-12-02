@@ -106,7 +106,7 @@ abstract class Cart
         return true;
     }
 
-    public static function earse()
+    public static function erase()
     {
         session()->forget('cart');
     }

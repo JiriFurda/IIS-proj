@@ -53,7 +53,7 @@ class SaleController extends Controller
         else
     	    $sale = Branch::current()->addSale(['user_id' => auth()->user()->id], Cart::items());
 
-    	Cart::earse();
+    	Cart::erase();
 
     	return redirect()->route('sales.show', $sale);
     }
