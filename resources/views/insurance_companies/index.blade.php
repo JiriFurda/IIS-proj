@@ -1,10 +1,14 @@
+<?php
+    use App\InsuranceCompany;
+?>
+
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
 	<h1>Pojišťovny v databázi:</h1>
 
-    {{$errors}}
+        <!--{{$errors}}-->
 
     @if(empty($insuranceCompanies))
 		<p>V databázi nejsou žádné pojišťovny.</p>

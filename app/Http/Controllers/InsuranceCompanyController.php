@@ -95,6 +95,7 @@ class InsuranceComapnyController extends Controller
         $rules = [
             'contribution' => ['array', new KeyIsID(Medicine::class), new KeyUnique()],
             ];
+        $this->validate(request(), $rules);
 
         foreach(Medicine::all() as $medicine)
         {

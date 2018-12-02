@@ -14,9 +14,10 @@
 		<ul>
 			@foreach($sales as $sale)
 				<li>
-					{!! $sale->nameLink() !!} {{$sale->confirmed ? null : '(Nepotvrzen)'}}
+                    {!! $sale->nameLink() !!} <a style="color:red">{{$sale->confirmed ? null : '(Nepotvrzen)'}}</a>
 				</li>
 			@endforeach
 		</ul>
 	@endif
+    </div>
 @endsection
