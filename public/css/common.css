@@ -31,4 +31,6 @@ a:visited {
     color: #9FADBD;
 }
 
-
+.errorMessage {
+    color:red;
+}

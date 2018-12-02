@@ -1,6 +1,7 @@
 <?php
 	use App\Classes\Cart;
 	use App\Branch;
+	use App\InsuranceCompany;
 
 	if(isset($medicine))
 		$mode = 'edit';
@@ -20,16 +21,28 @@
 
             <div>
                 Název:<br>
-                <input type="text" name="name" placeholder="Název" value="{{ old('name', $mode == 'edit' ? $medicine->name : null) }}" required>
-                <br>
-                <br>
+                <input type="text" name="name" placeholder="Název" value="{{ old('name', $mode == 'edit' ? $medicine->name : null)}}" required>
+                @if ($errors->has("name"))
+                    @foreach ($errors->get("name") as $error)
+                        <div class="errorMessage">
+                            <strong>{{$error}}</strong>
+                        </div>
+                    @endforeach
+                @endif
             </div>
+            <br>
             <div>
                 Cena:<br>
                 <input type="number" name="price" placeholder="Cena > 0" value="{{ old('price', $mode == 'edit' ? $medicine->price : null  ) }}" min=0 step=0.01 required>
-                <br>
-                <br>
+                @if ($errors->has("price"))
+                    @foreach ($errors->get("price") as $error)
+                        <div class="errorMessage">
+                            <strong>{{$error}}</strong>
+                        </div>
+                    @endforeach
+                @endif
             </div>
+            <br>
             <div>
                 Nutnost předpisu:
                 <select name="prescription">

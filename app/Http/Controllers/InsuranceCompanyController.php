@@ -96,6 +96,7 @@ class InsuranceComapnyController extends Controller
             'contribution' => ['array', new KeyIsID(Medicine::class), new KeyUnique()],
             'contribution.*' => 'nullable|numeric|min:0|regex:/^\d+(\.[\d]{1,2})?$/',
             ];
+        $this->validate(request(), $rules);
 
         foreach(Medicine::all() as $medicine)
         {

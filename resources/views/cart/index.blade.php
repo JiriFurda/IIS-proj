@@ -37,6 +37,13 @@
                                 <td>
                                     {{-- @todo error class when $cartItem->verifyStock() == false --}}
                                     <input type="number" name="medicines[{{ $loop->index }}][quantity]" value="{{ $cartItem->quantity }}"> ks
+                                    @if ($errors->has("medicines.0.quantity"))
+                                        @foreach ($errors->get("medicines.0.quantity") as $error)
+                                            <div class="errorMessage">
+                                                <strong>{{$error}}</strong>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                     <input type="hidden" name="medicines[{{ $loop->index }}][id]" value="{{ $cartItem->medicine->id }}">
                                 </td>
                                 <td>
