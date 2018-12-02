@@ -9,7 +9,7 @@
         <div class="container-fluid " style="background-color:#1F2631; margin-bottom: 30px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <ul class="my-ul">
                             <li>
                                 <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-info btn-sm">Léky</button></a>
@@ -41,34 +41,68 @@
                     </div>
 
             <!-- User detail section start -->
-                <div class="col-sm-2">
-                    <b>{{ auth()->user()->name }}</b> -
+                <div class="col-sm-3">
+                    <div class="d-flex flex-row">
+                        <div class="text-truncate">
+                            <i class="fas fa-user"></i>
+                            <b>{{ auth()->user()->name }}</b>
+                        </div>
 
-
-                    <a class="btn-link" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                        {{ __('Odhlásit se') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                        <div class="px-1">
+                            <i>({{ auth()->user()->role->name }})</i>
+                        </div>
+                        <div>
+                            <a class="btn-link" href="{{ route('logout') }}" title="Odhlásit se"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
 
                     <!-- User detail section end -->
 
 
+                    <div class="text-truncate">
+                        <i class="fas fa-warehouse"></i>
 
-                    <div>
-                        <!--<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>-->
-                        <div>Role: {{ auth()->user()->role->name }}</div>
+                        @if(auth()->user()->isAuthorised('superior'))
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownBranchSwitch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Branch::current()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownBranchSwitch">
+                                <h6 class="dropdown-header">Změnit aktuální pobočku</h6>
+
+                                @foreach(Branch::all() as $branch)
+                                    <a class="dropdown-item" href="{{ route('branches.switch', $branch) }}">{{ $branch->name }}</a>
+                                @endforeach
+                            </div>
+                        @else
+                            {!! Branch::current()->nameLink() !!}
+                        @endif
                     </div>
 
 
 
                     <!-- Cart summary section start -->
                     <div>
+                        <i class="fas fa-shopping-cart"></i>
                         @if(!Cart::isEmpty())
-                            <a href="{{ route('cart.index') }}" title="Košík">{{ Cart::count() }} položek</a>
+                            <a href="{{ route('cart.index') }}" title="Košík">
+                                @php $count = Cart::count(); @endphp
+
+                                {{$count}}
+                                @if($count > 4 || $count == 0)
+                                    položek
+                                @elseif($count > 1)
+                                    položky
+                                @elseif($count == 1)
+                                    položka
+                                @endif
+                            </a>
                         @else
                             Košík je prázdný
                         @endif

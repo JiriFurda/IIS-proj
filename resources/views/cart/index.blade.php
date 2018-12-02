@@ -23,8 +23,8 @@
                             <th>Počet kusů</th>
                             <th>Počet kusů skladem</th>
                             <th>Cena za kus</th>
-                            <th>Súčet</th>
-                            <th>Zrušiť</th>
+                            <th>Součet</th>
+                            <th>Odebrat</th>
 
                         </tr>
                     </thead>
@@ -56,7 +56,9 @@
                                     <b>{{ $cartItem->getPrice() }} Kč</b>
                                 </td>
                                 <td>
-                                    <a href="{{ route('cart.delete', $cartItem->medicine) }}">X</a>
+                                    <a href="{{ route('cart.delete', $cartItem->medicine) }}" title="Odebrat položku">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -64,8 +66,11 @@
                 </table>
 
                     <div class="row">
-                        <div class="col-10"> <button type="submit" class="btn btn-sm btn-warning">Upravit množství</button> </div>
-                        <div class="col-2"> Celkem: @todo Kč </div>
+                        <div class="col-10">
+                            <a href="{{ route('cart.erase') }}" class="btn btn-sm btn-danger">Vyprázdnit košík</a>
+                            <button type="submit" class="btn btn-sm btn-warning">Upravit množství</button>
+                        </div>
+                        <div class="col-2"> Celkem: {{ Cart::sum() }} Kč </div>
                     </div>
                 <br>
                 <a href="{{ route('sales.store') }}"><button type="button" class="btn btn-block btn-success">Dokončit nákup</button></a>

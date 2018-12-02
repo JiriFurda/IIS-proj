@@ -43,7 +43,7 @@ class MedicineController extends Controller
     {
     	$medicine = $this->store_or_update();
 
-    	session()->flash('alert-success', "Lék {$medicine->name} byly úspěšně přidán");
+    	session()->flash('alert-success', "Lék {$medicine->name} byl úspěšně přidán");
 
     	return redirect()->route('medicines.show', compact('medicine'));
     }

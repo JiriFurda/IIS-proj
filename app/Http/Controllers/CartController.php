@@ -68,4 +68,12 @@ class CartController extends Controller
 
 		return back();
     }
+
+    public function erase(Medicine $medicine)
+    {
+        Cart::erase();
+
+        session()->flash('alert-success', 'Košík byl úspěšně vyprázdněn');
+        return redirect()->back();
+    }
 }

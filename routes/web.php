@@ -23,13 +23,13 @@ Route::middleware('auth')->group(function () {
 
     // Medicines
     Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
-    Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show');
     Route::middleware('role:superior')->group(function () {
         Route::get('/medicines/create', 'MedicineController@create')->name('medicines.create');
         Route::post('/medicines/create', 'MedicineController@store')->name('medicines.store');
         Route::get('/medicines/{medicine}/edit', 'MedicineController@edit')->name('medicines.edit');
         Route::post('/medicines/{medicine}/edit', 'MedicineController@update')->name('medicines.update');
     });
+    Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show'); // @warning Must be after routes with '/medicines/create'
 
     // Supply
     Route::get('/supply', 'SupplyController@create')->name('supply.create');
@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     // Cart
     Route::post('/medicines/{medicine}/cart', 'CartController@store')->name('medicines.store');
     Route::get('/cart', 'CartController@index')->name('cart.index');
+    Route::get('/cart/erase', 'CartController@earse')->name('cart.erase');
     Route::post('/cart/update', 'CartController@update')->name('cart.update');
     Route::get('/cart/{medicine}/delete', 'CartController@delete')->name('cart.delete');
 
@@ -52,7 +53,9 @@ Route::middleware('auth')->group(function () {
     // Branches
     Route::get('/branches', 'BranchController@index')->name('branches.index');
     Route::get('/branches/{branch}', 'BranchController@show')->name('branches.show');
-
+    Route::middleware('role:superior')->group(function () {
+        Route::get('/branches/{branch}/switch', 'BranchController@switch')->name('branches.switch');
+    });
     // Insruance comapnies
     Route::get('/insurance_companies', 'InsuranceComapnyController@index')->name('insurance_companies.index');
     Route::middleware('role:superior')->group(function () {

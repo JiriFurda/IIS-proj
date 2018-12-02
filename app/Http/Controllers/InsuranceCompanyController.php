@@ -94,13 +94,12 @@ class InsuranceComapnyController extends Controller
     {
         $rules = [
             'contribution' => ['array', new KeyIsID(Medicine::class), new KeyUnique()],
-            'contribution.*' => 'nullable|numeric|min:0|regex:/^\d+(\.[\d]{1,2})?$/',
             ];
         $this->validate(request(), $rules);
 
         foreach(Medicine::all() as $medicine)
         {
-            $rules['contribution.'.$medicine->id] = 'nullable|max:'.$medicine->price;
+            $rules['contribution.'.$medicine->id] = 'nullable|numeric|min:0|regex:/^\d+(\.[\d]{1,2})?$/|max:'.$medicine->price;
         }
         $this->validate(request(), $rules);
 

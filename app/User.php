@@ -12,13 +12,17 @@ class User extends Authenticatable
     use Notifiable;
 
     // --- Laravel settings ---
-    protected $fillable = ['name', 'email', 'password'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $guarded = ['id'];
 
     // --- Eloquent relationships ---
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
 
