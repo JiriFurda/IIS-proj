@@ -27,7 +27,7 @@ class SaleController extends Controller
     {
     	if(Cart::isEmpty())
     	{
-    		session()->flash('alert-error', 'S prázným košíkem nelze vytvořit prodej.');
+    		session()->flash('alert-danger', 'S prázným košíkem nelze vytvořit prodej.');
     		return back();
     	}
 
@@ -35,7 +35,7 @@ class SaleController extends Controller
 
     	if(!Cart::verifyStock())
     	{
-    		session()->flash('alert-error', 'Na skladě není dostatek léků pro vytvoření prodeje.');
+    		session()->flash('alert-danger', 'Na skladě není dostatek léků pro vytvoření prodeje.');
     		return back();
     	}
 
@@ -78,13 +78,13 @@ class SaleController extends Controller
     {
         if($sale->confirmed)
         {
-            session()->flash('alert-error', 'Prodej je již potvrzen.');
+            session()->flash('alert-danger', 'Prodej je již potvrzen.');
             return back();
         }
 
         if($sale->user_id != auth()->user()->id)
         {
-            session()->flash('alert-error', 'Prodej může potvrdit pouze uživatel, který daný prodej vytvořil.');
+            session()->flash('alert-danger', 'Prodej může potvrdit pouze uživatel, který daný prodej vytvořil.');
             return back();
         }
 

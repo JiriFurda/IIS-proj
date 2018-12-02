@@ -32,8 +32,9 @@
 
     </style>-->
     </head>
-    <body>
-        @include('layouts.partials.header')
+        <body>
+            @include('layouts.partials.header')
+            @include('layouts.partials.flash_messages')
 
             @yield('content')
 
