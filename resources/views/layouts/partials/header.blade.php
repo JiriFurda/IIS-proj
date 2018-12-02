@@ -78,7 +78,16 @@
                         <i class="fas fa-shopping-cart"></i>
                         @if(!Cart::isEmpty())
                             <a href="{{ route('cart.index') }}" title="Košík">
-                                {{ Cart::count() }} položek
+                                @php $count = Cart::count(); @endphp
+
+                                {{$count}}
+                                @if($count > 4 || $count == 0)
+                                    položek
+                                @elseif($count > 1)
+                                    položky
+                                @elseif($count == 1)
+                                    položka
+                                @endif
                             </a>
                         @else
                             Košík je prázdný
