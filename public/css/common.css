@@ -21,13 +21,13 @@ body {
 
 }
 
-a:link:not(.btn) {
+a:link:not(.btn):not(.alert-link) {
     color: #9FADBD;
     font-weight: bold;
 }
 
 /* visited link */
-a:visited:not(.btn) {
+a:visited:not(.btn):not(.alert-link) {
     color: #9FADBD;
 }
 

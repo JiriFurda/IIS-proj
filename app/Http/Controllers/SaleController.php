@@ -35,7 +35,7 @@ class SaleController extends Controller
 
     	if(!Cart::verifyStock())
     	{
-    		session()->flash('alert-danger', 'Na skladě není dostatek léků pro vytvoření prodeje.');
+    		session()->flash('alert-danger', 'Na skladě není dostatek léků pro vytvoření prodeje. Chcete vytvořit <a class="alert-link" href="'.route('reservations.create').'">rezervaci?</a>');
     		return back();
     	}
 

@@ -32,4 +32,9 @@ class Reservation extends Model
         return !is_null($this->completed_at);
     }
 
+    public function getRichStateAttribute()
+    {
+        return ($this->completed ? 'Dokončena' : 'Aktivní');
+    }
+
 }

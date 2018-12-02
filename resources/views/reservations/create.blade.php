@@ -47,7 +47,7 @@
                                 <td>
                                     <input type="number"
                                         name="medicines_quantity[{{ $cartItem->medicine->id }}]"
-                                        value="{{ old("medicines_quantity[{$cartItem->medicine->id}]", $cartItem->quantity - Branch::current()->getQuantityInStock($cartItem->medicine)) }}"	{{-- Value sent before or amount that is not in stock --}}
+                                        value="{{ old("medicines_quantity[{$cartItem->medicine->id}]", (($quantity = $cartItem->quantity - Branch::current()->getQuantityInStock($cartItem->medicine)) > 0 ? $quantity : 0)) }}"	{{-- Value sent before or amount that is not in stock --}}
                                         min=0>
                                     ks
                                 </td>

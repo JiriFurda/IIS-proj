@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/suppliers/{supplier}', 'SupplierController@show')->name('suppliers.show');
 
     // Reservations
+    Route::get('/reservations', 'ReservationController@index')->name('reservations.index');
     Route::get('/reservations/create', 'ReservationController@create')->name('reservations.create');
     Route::post('/reservations/store', 'ReservationController@store')->name('reservations.store');
 

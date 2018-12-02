@@ -15,7 +15,7 @@
                                 <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-info btn-sm">Léky</button></a>
                             </li>
                             <li>
-                                <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-info btn-sm">Rezervace</button></a>
+                                <a href="{{ route('reservations.index') }}"><button type="button" class="btn btn-info btn-sm">Rezervace</button></a>
                             </li>
                             <li>
                                 <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-info btn-sm">Prodeje</button></a>
