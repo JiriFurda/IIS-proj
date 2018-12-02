@@ -31,6 +31,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/medicines/{medicine}/edit', 'MedicineController@update')->name('medicines.update');
     });
 
+    // Supply
+    Route::get('/supply', 'SupplyController@create')->name('supply.create');
+    Route::post('/supply/store', 'SupplyController@store')->name('supply.store');
+
     // Cart
     Route::post('/medicines/{medicine}/cart', 'CartController@store')->name('medicines.store');
     Route::get('/cart', 'CartController@index')->name('cart.index');

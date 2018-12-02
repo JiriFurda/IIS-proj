@@ -54,6 +54,9 @@
 				<li>
 					<a href="#">//Rezervace</a>
 				</li>
+                <li>
+                    <a href="{{ route('supply.create') }}">Dodávka</a>
+                </li>
 				<li>
 					<a href="{{ route('sales.index') }}">Prodeje</a>
 				</li>

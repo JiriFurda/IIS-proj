@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Validator;
+use DB;
 
 use App\InsuranceCompany;
 use App\Medicine;
 use App\Rules\KeyIsID;
 use App\Rules\KeyUnique;
-use Illuminate\Support\Facades\App;
-use Validator;
-use DB;
+
 
 class InsuranceComapnyController extends Controller
 {
