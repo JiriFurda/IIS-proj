@@ -18,13 +18,17 @@ ul.my-ul > li {
 body {
     color: #9FADBD;
     background-color: #272C38;
+
 }
 
 a:link {
     color: #9FADBD;
+    font-weight: bold;
 }
 
 /* visited link */
 a:visited {
     color: #9FADBD;
 }
+
+

@@ -1,21 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Dodavatel: {{ $supplier->name }}</h1>
+    <div class="container">
+        <h1>Dodavatel: {{ $supplier->name }}</h1>
 
-	<h2>Nabídka:</h2>	
-	@if($supplier->medicines()->count())
-		
-		<ul>
-			@foreach ($supplier->medicines as $medicine)
-				<li>
-					{!! $medicine->nameLink() !!} ({{$medicine->pivot->price}} kč)
-				</li>
-			@endforeach
-		<ul>
+        <h2>Nabídka:</h2>
+        @if($supplier->medicines()->count())
 
-	@else
-		Tento dodvatel aktuálně nedodává žádné léky.
-	@endif
+            <ul>
+                @foreach ($supplier->medicines as $medicine)
+                    <li>
+                        {!! $medicine->nameLink() !!} ({{$medicine->pivot->price}} kč)
+                    </li>
+                @endforeach
+            </ul>
+
+        @else
+            Tento dodvatel aktuálně nedodává žádné léky.
+        @endif
+    </div>
+
 @endsection
-	
