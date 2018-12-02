@@ -1,5 +1,6 @@
 <?php
 	use App\Role;
+	use App\Branch;
 
     if(isset($user))
         $mode = 'edit';
@@ -44,6 +45,15 @@
 				@endforeach
 			</select>
 		</div>
+        <div>
+            Pobočka:
+            <select name="branch_id">
+                @foreach(Branch::all() as $branch)
+                    {{-- @if(auth()->user()->isAuthorised($role)) --}}
+                    <option value="{{ $branch->id }}" {{ old('branch_id', ($mode == 'edit' ? $user->branch : null)) == $branch ? 'selected' : '' }}>{{ $branch->name }}</option>
+                @endforeach
+            </select>
+        </div>
 		<div>
 			<button type="submit">{{ $mode == 'edit' ? 'Aktualizovat' : 'Vytvořit' }}</button>
 		</div>

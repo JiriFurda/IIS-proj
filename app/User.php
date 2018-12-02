@@ -13,7 +13,6 @@ class User extends Authenticatable
 
     // --- Laravel settings ---
     protected $guarded = ['id'];
-    protected $hidden = ['password'];
 
     // --- Eloquent relationships ---
     public function role()
