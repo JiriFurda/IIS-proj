@@ -6,79 +6,78 @@
 @auth
 	<header>
 
-		<!-- User detail section start -->
-	    <div>
-	    	<b>{{ auth()->user()->name }}</b> -
-	   
-	    
-		    <a href="{{ route('logout') }}"
-		       onclick="event.preventDefault();
-		                     document.getElementById('logout-form').submit();">
-		        {{ __('Odhlásit se') }}
-		    </a>
-		    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-		        @csrf
-	    	</form>
-	    </div>
-	    <!-- User detail section end -->
+        <div class="container" style="background-color:#1F2631;">
+            <div class="row">
+                <div class="col-sm-10">
+                    <ul class="my-ul">
+                        <li>
+                            <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-info btn-sm">Léky</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-info btn-sm">Rezervace</button></a>
+                        <li>
+                            <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-info btn-sm">Prodeje</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-info btn-sm">Pobočky</button></a>
+                        </li>
+                        <li>
+                            <a href="#"><button type="button" class="btn btn-info btn-sm">//Pojišťovny</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-info btn-sm">Dodavatelé</button></a>
+                        </li>
+                        @if(auth()->user()->isAuthorised('superior'))
+                            <li>
+                                <a href="{{ route('users.index') }}"><button type="button" class="btn btn-info btn-sm">Uživatelé</button></a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+
+            <!-- User detail section start -->
+                <div class="col-sm-2">
+                    <b>{{ auth()->user()->name }}</b> -
+
+
+                    <a class="btn-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Odhlásit se') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
+                    <!-- User detail section end -->
 
 
 
-	    <div>
-	    	<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>
-	    	<div>Role: {{ auth()->user()->role->name }}</div>
-	    </div>
+                    <div>
+                        <!--<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>-->
+                        <div>Role: {{ auth()->user()->role->name }}</div>
+                    </div>
 
 
 
-	    <!-- Cart summary section start -->
-		<div>
-			@if(!Cart::isEmpty())
-				<a href="{{ route('cart.index') }}" title="Košík">{{ Cart::count() }} položek</a>
-			@else
-				Košík je prázdný
-			@endif
-		</div>
-		<!-- Cart summary section end -->
+                    <!-- Cart summary section start -->
+                    <div>
+                        @if(!Cart::isEmpty())
+                            <a href="{{ route('cart.index') }}" title="Košík">{{ Cart::count() }} položek</a>
+                        @else
+                            Košík je prázdný
+                        @endif
+                    </div>
 
-		<hr>
-		
-		<!-- Navigation menu section start -->
-		<nav>
-			Menu:
+                </div>
+                <!-- Cart summary section end -->
 
-			<ul>
-				<li>
-					<a href="{{ route('medicines.index') }}">Léky</a>
-				</li>
-				<li>
-					<a href="#">//Rezervace</a>
-				</li>
-                <li>
-                    <a href="{{ route('supply.create') }}">Dodávka</a>
-                </li>
-				<li>
-					<a href="{{ route('sales.index') }}">Prodeje</a>
-				</li>
-				<li>
-					<a href="{{ route('branches.index') }}">Pobočky</a>
-				</li>
-				<li>
-					<a href="{{ route('insurance_companies.index') }}">Pojiťovny</a>
-				</li>
-				<li>
-					<a href="{{ route('suppliers.index') }}">Dodavatelé</a>
-				</li>
-				@if(auth()->user()->isAuthorised('superior'))
-					<li>
-						<a href="{{ route('users.index') }}">Uživatelé</a>
-					</li>
-				@endif
-			</ul>
-		</nav>
-		<!-- Navigation menu section end -->
 
-		<hr>
+
+            </div>
+
+        </div>
+    <br><br>
 
 	</header>
 @endauth
