@@ -8,16 +8,10 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
-
-
-
     <!--<style type="text/css">
         ul.my-ul {
             display: flex;
@@ -36,14 +30,16 @@
         }
 
     </style>-->
+    </head>
+    <body>
+        @include('layouts.partials.header')
 
+            @yield('content')
 
-</head>
-<body>
-    @include('layouts.partials.header')
-
-    @include('layouts.partials.flash_messages')
-
-    @yield('content')
-</body>
+            <!-- Scripts -->
+            <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('js/datepicker-cs.js') }}"></script>
+            @stack('scripts')
+        </body>
 </html>

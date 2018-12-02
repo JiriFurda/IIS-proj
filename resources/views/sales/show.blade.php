@@ -25,6 +25,9 @@
                     <th scope="col">Název léku</th>
                     <th scope="col">Množství</th>
                     <th scope="col">Cena za kus</th>
+                @if($sale->prescripted)
+                    <th>Hrazeno za kus</th>
+                @endif
                     <th scope="col">Cena</th>
                 </tr>
             </thead>
@@ -41,6 +44,15 @@
                         <td>
                             {{ $medicine->pivot->price_per_item }} Kč / ks
                         </td>
+                    @if($sale->prescripted)
+                        <td>
+                            @if($medicine->pivot->insurance_contribution_per_item )
+                                {{ $medicine->pivot->insurance_contribution_per_item }} Kč / ks
+                            @else
+                                -
+                            @endif
+                        </td>
+                    @endif
                         <td>
                             <b>{{ $medicine->overall_price }} Kč</b>
                         </td>
@@ -49,5 +61,18 @@
             </tbody>
         </table>
             <center>Celková cena: <b>{{ $sale->overall_price }} Kč</b></center>
+    @if($sale->prescripted)
+        <br>
+        Cena pro zákazníka: <b>{{ $sale->overall_customer_price }} Kč</b>
+    @endif
+
+    @if($sale->prescripted)
+        <h2>Informace o prodeji na předpis</h2>
+        <ul>
+            <li>Rodné číslo zákazníka: {{ $sale->customer_nin }}</li>
+            <li>Pojišťovna: {!! $sale->insuranceCompany->nameLink() !!}</li>
+        </ul>
+    @endif
+
     </div>
 @endsection

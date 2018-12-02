@@ -18,8 +18,6 @@ class ReservationController extends Controller
 
     public function store()
     {
-    	//dd(request());
-
     	$this->validate(request(), 
 		[
 			'customer_name' => 'required',

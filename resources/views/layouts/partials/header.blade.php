@@ -6,34 +6,39 @@
 @auth
 	<header>
 
-        <div class="container" style="background-color:#1F2631;">
-            <div class="row">
-                <div class="col-sm-10">
-                    <ul class="my-ul">
-                        <li>
-                            <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-info btn-sm">Léky</button></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-info btn-sm">Rezervace</button></a>
-                        <li>
-                            <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-info btn-sm">Prodeje</button></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-info btn-sm">Pobočky</button></a>
-                        </li>
-                        <li>
-                            <a href="#"><button type="button" class="btn btn-info btn-sm">//Pojišťovny</button></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-info btn-sm">Dodavatelé</button></a>
-                        </li>
-                        @if(auth()->user()->isAuthorised('superior'))
+        <div class="container-fluid " style="background-color:#1F2631; margin-bottom: 30px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <ul class="my-ul">
                             <li>
-                                <a href="{{ route('users.index') }}"><button type="button" class="btn btn-info btn-sm">Uživatelé</button></a>
+                                <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-info btn-sm">Léky</button></a>
                             </li>
-                        @endif
-                    </ul>
-                </div>
+                            <li>
+                                <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-info btn-sm">Rezervace</button></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-info btn-sm">Prodeje</button></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-info btn-sm">Pobočky</button></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('insurance_companies.index') }}"><button type="button" class="btn btn-info btn-sm">Pojišťovny</button></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-info btn-sm">Dodavatelé</button></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('supply.create') }}"><button type="button" class="btn btn-info btn-sm">Dodávka</button></a>
+                            </li>
+                            @if(auth()->user()->isAuthorised('superior'))
+                                <li>
+                                    <a href="{{ route('users.index') }}"><button type="button" class="btn btn-info btn-sm">Uživatelé</button></a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
 
             <!-- User detail section start -->
                 <div class="col-sm-2">
@@ -77,7 +82,6 @@
             </div>
 
         </div>
-    <br><br>
-
+    </div>
 	</header>
 @endauth

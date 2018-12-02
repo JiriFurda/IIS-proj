@@ -44,9 +44,37 @@ class Branch extends Model
 
 
     // --- Relationship constructors ---
-    public function addSale($requestData = [])
+    public function addSale($saleData, $cartItems)
     {
-        return $this->sales()->create($requestData);
+        $sale = $this->sales()->create($saleData);
+
+        foreach($cartItems as $cartItem)
+        {
+            if($cartItem->medicine->prescription)
+            {
+                if($insuranceCompany = $cartItem->medicine->insuranceCompanies->find($sale->insuranceCompany))
+                    $contribution = $insuranceCompany->pivot->amount;
+                else
+                    $contribution = 0;
+            }
+            else
+                $contribution = null;
+
+
+            $sale->medicines()->attach($cartItem->medicine->id,
+                [
+                    'insurance_contribution_per_item' => $contribution,
+                    'quantity' => $cartItem->quantity,
+                    'price_per_item' => $cartItem->medicine->price
+                ]);
+
+            $cartItem->medicine->decreaseAmountInBranch($sale->branch, $cartItem->quantity);
+
+            // @todo Critical part! Throw + catch and revert whole sale if something goes wrong
+            // Or save it after everything is done? :O
+        }
+
+        return $sale;
     }
 
 

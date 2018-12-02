@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     // --- Laravel settings ---
-    protected $fillable = ['user_id'];
+    protected $guarded = ['id'];
 
 
 	// --- Eloquent relationships ---
@@ -18,12 +18,24 @@ class Sale extends Model
 
     public function medicines()
     {
-        return $this->belongsToMany(Medicine::class)->withPivot('quantity', 'price_per_item');
+        return $this->belongsToMany(Medicine::class)->withPivot('quantity', 'price_per_item', 'insurance_contribution_per_item');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function insuranceCompany()
+    {
+        return $this->belongsTo(InsuranceCompany::class);
+    }
+
+
+    // --- Scopes ---
+    public function scopeConfirmed($query)
+    {
+        return $query->where('confirmed', true);
     }
 
 
@@ -48,13 +60,49 @@ class Sale extends Model
     public function getOverallPriceAttribute()
     {
         $sum = 0;
-
-        foreach ($this->medicines as $medicine)
+        foreach($this->medicines as $medicine)
         {
             $sum += $medicine->pivot->price_per_item * $medicine->pivot->quantity;
         }
 
         return $sum;
+    }
+
+    public function getOverallCustomerPriceAttribute()
+    {
+        if(!$this->prescripted)
+            return $this->overall_price;
+
+        $sum = 0;
+        foreach($this->medicines as $medicine)
+        {
+            $contribution = $medicine->pivot->insurance_contribution_per_item;
+            $contribution = ($contribution ? $contribution : 0);
+            $sum += ($medicine->pivot->price_per_item - $contribution) * $medicine->pivot->quantity;
+        }
+
+        return $sum;
+    }
+
+    public function getOverallInsurancePriceAttribute()
+    {
+        if(!$this->prescripted)
+            return $this->overall_price;
+
+        $sum = 0;
+        foreach($this->medicines as $medicine)
+        {
+            $contribution = $medicine->pivot->insurance_contribution_per_item;
+            $contribution = ($contribution ? $contribution : 0);
+            $sum += $contribution * $medicine->pivot->quantity;
+        }
+
+        return $sum;
+    }
+
+    public function getPrescriptedAttribute()
+    {
+        return $this->customer_nin && $this->insuranceCompany;
     }
 
 

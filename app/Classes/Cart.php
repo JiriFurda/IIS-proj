@@ -78,7 +78,7 @@ abstract class Cart
     {
         foreach(self::items() as $cartItem)
         {
-            if($cartItem->medicine->prescripted)
+            if($cartItem->medicine->prescription)
                 return true;
         }
 

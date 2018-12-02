@@ -8,6 +8,7 @@ class Supplier extends Model
 {
     // --- Laravel settings ---
 	public $timestamps = false;
+    public $guarded = ['id'];
     
 
     // --- Eloquent relationships ---
