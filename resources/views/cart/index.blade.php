@@ -58,7 +58,7 @@
 
                     <div class="row">
                         <div class="col-10"> <button type="submit" class="btn btn-sm btn-warning">Upravit množství</button> </div>
-                        <div class="col-2"> Celkem: @todo Kč </div>
+                        <div class="col-2"> Celkem: {{ Cart::sum() }} Kč </div>
                     </div>
                 <br>
                 <a href="{{ route('sales.store') }}"><button type="button" class="btn btn-block btn-success">Dokončit nákup</button></a>
