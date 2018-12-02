@@ -23,13 +23,13 @@ Route::middleware('auth')->group(function () {
 
     // Medicines
     Route::get('/medicines', 'MedicineController@index')->name('medicines.index');
-    Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show');
     Route::middleware('role:superior')->group(function () {
         Route::get('/medicines/create', 'MedicineController@create')->name('medicines.create');
         Route::post('/medicines/create', 'MedicineController@store')->name('medicines.store');
         Route::get('/medicines/{medicine}/edit', 'MedicineController@edit')->name('medicines.edit');
         Route::post('/medicines/{medicine}/edit', 'MedicineController@update')->name('medicines.update');
     });
+    Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show'); // @warning Muset be after routes with '/medicines/create'
 
     // Supply
     Route::get('/supply', 'SupplyController@create')->name('supply.create');
