@@ -6,7 +6,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>IS lékárny</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
