@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/medicines/{medicine}/edit', 'MedicineController@edit')->name('medicines.edit');
         Route::post('/medicines/{medicine}/edit', 'MedicineController@update')->name('medicines.update');
     });
-    Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show'); // @warning Muset be after routes with '/medicines/create'
+    Route::get('/medicines/{medicine}', 'MedicineController@show')->name('medicines.show'); // @warning Must be after routes with '/medicines/create'
 
     // Supply
     Route::get('/supply', 'SupplyController@create')->name('supply.create');
@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     // Cart
     Route::post('/medicines/{medicine}/cart', 'CartController@store')->name('medicines.store');
     Route::get('/cart', 'CartController@index')->name('cart.index');
+    Route::get('/cart/erase', 'CartController@earse')->name('cart.erase');
     Route::post('/cart/update', 'CartController@update')->name('cart.update');
     Route::get('/cart/{medicine}/delete', 'CartController@delete')->name('cart.delete');
 

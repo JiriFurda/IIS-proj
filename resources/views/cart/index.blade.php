@@ -57,7 +57,10 @@
                 </table>
 
                     <div class="row">
-                        <div class="col-10"> <button type="submit" class="btn btn-sm btn-warning">Upravit množství</button> </div>
+                        <div class="col-10">
+                            <a href="{{ route('cart.erase') }}" class="btn btn-sm btn-danger">Vyprázdnit košík</a>
+                            <button type="submit" class="btn btn-sm btn-warning">Upravit množství</button>
+                        </div>
                         <div class="col-2"> Celkem: {{ Cart::sum() }} Kč </div>
                     </div>
                 <br>
