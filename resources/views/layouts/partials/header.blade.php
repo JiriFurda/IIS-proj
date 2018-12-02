@@ -16,6 +16,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('reservations.create') }}"><button type="button" class="btn btn-info btn-sm">Rezervace</button></a>
+                            </li>
                             <li>
                                 <a href="{{ route('sales.index') }}"><button type="button" class="btn btn-info btn-sm">Prodeje</button></a>
                             </li>
@@ -23,10 +24,13 @@
                                 <a href="{{ route('branches.index') }}"><button type="button" class="btn btn-info btn-sm">Pobočky</button></a>
                             </li>
                             <li>
-                                <a href="#"><button type="button" class="btn btn-info btn-sm">//Pojišťovny</button></a>
+                                <a href="{{ route('insurance_companies.index') }}"><button type="button" class="btn btn-info btn-sm">Pojišťovny</button></a>
                             </li>
                             <li>
                                 <a href="{{ route('suppliers.index') }}"><button type="button" class="btn btn-info btn-sm">Dodavatelé</button></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('supply.create') }}"><button type="button" class="btn btn-info btn-sm">Dodávka</button></a>
                             </li>
                             @if(auth()->user()->isAuthorised('superior'))
                                 <li>
