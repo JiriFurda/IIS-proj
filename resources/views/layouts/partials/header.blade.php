@@ -9,7 +9,7 @@
         <div class="container-fluid " style="background-color:#1F2631; margin-bottom: 30px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <ul class="my-ul">
                             <li>
                                 <a href="{{ route('medicines.index') }}"><button type="button" class="btn btn-info btn-sm">Léky</button></a>
@@ -41,26 +41,34 @@
                     </div>
 
             <!-- User detail section start -->
-                <div class="col-sm-2">
-                    <b>{{ auth()->user()->name }}</b> -
+                <div class="col-sm-3">
+                    <div class="d-flex flex-row">
+                        <div class="text-truncate">
+                            <i class="fas fa-user"></i>
+                            <b>{{ auth()->user()->name }}</b>
+                        </div>
 
-
-                    <a class="btn-link" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                        {{ __('Odhlásit se') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                        <div class="px-1">
+                            <i>({{ auth()->user()->role->name }})</i>
+                        </div>
+                        <div>
+                            <a class="btn-link" href="{{ route('logout') }}" title="Odhlásit se"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
 
                     <!-- User detail section end -->
 
 
 
-                    <div>
-                        <!--<div>Pobočka: {!! Branch::current()->nameLink() !!}</div>-->
-                        <div>Role: {{ auth()->user()->role->name }}</div>
+                    <div class="text-truncate">
+                        <i class="fas fa-warehouse"></i> {!! Branch::current()->nameLink() !!}
                     </div>
 
 
@@ -68,8 +76,12 @@
                     <!-- Cart summary section start -->
                     <div>
                         @if(!Cart::isEmpty())
-                            <a href="{{ route('cart.index') }}" title="Košík">{{ Cart::count() }} položek</a>
+                            <a href="{{ route('cart.index') }}" title="Košík">
+                                <i class="fas fa-shopping-cart"></i>
+                                {{ Cart::count() }} položek
+                            </a>
                         @else
+                            <i class="fas fa-shopping-cart"></i>
                             Košík je prázdný
                         @endif
                     </div>
