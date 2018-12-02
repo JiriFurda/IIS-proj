@@ -75,13 +75,12 @@
 
                     <!-- Cart summary section start -->
                     <div>
+                        <i class="fas fa-shopping-cart"></i>
                         @if(!Cart::isEmpty())
                             <a href="{{ route('cart.index') }}" title="Košík">
-                                <i class="fas fa-shopping-cart"></i>
                                 {{ Cart::count() }} položek
                             </a>
                         @else
-                            <i class="fas fa-shopping-cart"></i>
                             Košík je prázdný
                         @endif
                     </div>
