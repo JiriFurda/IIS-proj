@@ -40,13 +40,13 @@ class MedicinesTableSeeder extends Seeder
         Medicine::create([
             'name' => 'ZENTIVA ',
             'price' => 330,
-            'prescription' => false
+            'prescription' => true
         ]);
 
         Medicine::create([
             'name' => 'OMEPRAZOL',
             'price' => 120,
-            'prescription' => false
+            'prescription' => true
         ]);
 
         Medicine::create([

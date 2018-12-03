@@ -36,14 +36,16 @@
                 </thead>
                 <tbody>
                     @foreach($reports as $report)
-                        <tr>
-                            <td>
-                                {{$report['date']}}
-                            </td>
-                            <td>
-                                {{$report['price']}} Kč
-                            </td>
-                        </tr>
+                        @if($report['price'])
+                            <tr>
+                                <td>
+                                    {{$report['date']}}
+                                </td>
+                                <td>
+                                    {{$report['price']}} Kč
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

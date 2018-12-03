@@ -60,11 +60,13 @@
                 @endforeach
             </tbody>
         </table>
-            <center>Celková cena: <b>{{ $sale->overall_price }} Kč</b></center>
-    @if($sale->prescripted)
-        <br>
-        Cena pro zákazníka: <b>{{ $sale->overall_customer_price }} Kč</b>
-    @endif
+        <div class="text-center">
+            Celková cena: <b>{{ $sale->overall_price }} Kč</b>
+            @if($sale->prescripted)
+                <br>
+                Cena pro zákazníka: <b>{{ $sale->overall_customer_price }} Kč</b>
+            @endif
+        </div>
 
     @if($sale->prescripted)
         <h2>Informace o prodeji na předpis</h2>
