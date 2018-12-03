@@ -10,13 +10,16 @@
         @if(empty($suppliers))
             <p>V databázi nejsou žádní dodavatelé.</p>
         @else
-            <ul>
+            <table class="table table-dark">
+
+                <tbody>
                 @foreach($suppliers as $supplier)
-                    <li>
-                        {!! $supplier->nameLink() !!}
-                    </li>
+                    <tr>
+                        <th>{!! $supplier->nameLink() !!}</th>
+                    </tr>
                 @endforeach
-            </ul>
+                </tbody>
+            </table>
         @endif
     </div>
 @endsection

@@ -21,5 +21,15 @@ class BranchesTableSeeder extends Seeder
 			'name' => 'Pharmacy Aesculap',
 			'address' => 'Dornych 404/4, 602 00 Brno, Cesko'
 		]);
+
+        Branch::create([
+            'name' => 'APOTEX (ČR), spol. s r. o.',
+            'address' => 'Salvátorská 10, 116 22 Praha 1, Cesko'
+        ]);
+
+        Branch::create([
+            'name' => 'ICN Czech Republic, a. s.',
+            'address' => 'Vltavská 53,252 63 Roztoky, Cesko'
+        ]);
     }
 }
