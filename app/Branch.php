@@ -44,8 +44,16 @@ class Branch extends Model
 
 
     // --- Relationship constructors ---
-    public function addSale($saleData, $cartItems)
+    public function addSale($saleData, $cartItems, $virtual = false)
     {
+        if(!$virtual)
+        {
+            foreach ($cartItems as $cartItem) {
+                if (!$cartItem->verifyStock())
+                    return null;
+            }
+        }
+
         $sale = $this->sales()->create($saleData);
 
         foreach($cartItems as $cartItem)
@@ -68,13 +76,30 @@ class Branch extends Model
                     'price_per_item' => $cartItem->medicine->price
                 ]);
 
-            $cartItem->medicine->decreaseAmountInBranch($sale->branch, $cartItem->quantity);
-
-            // @todo Critical part! Throw + catch and revert whole sale if something goes wrong
-            // Or save it after everything is done? :O
+            if(!$virtual)
+                $cartItem->medicine->decreaseAmountInBranch($sale->branch, $cartItem->quantity);
         }
 
         return $sale;
+    }
+
+
+    public function addSupply($data)
+    {
+        $medicines = $this->medicines;
+        foreach($data as $medicineId => $addedAmount)
+        {
+            if(!$addedAmount)
+                continue;
+
+            if($this->medicines->find($medicineId))
+            {
+                $pivot = $this->medicines->find($medicineId)->pivot;
+                $pivot->update(['amount' => $pivot->amount + $addedAmount]);
+            }
+            else
+                $this->medicines()->attach($medicineId, ['amount' => $addedAmount]);
+        }
     }
 
 

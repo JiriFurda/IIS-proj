@@ -40,19 +40,6 @@ class InsuranceComapnyController extends Controller
         $from = Carbon::parse(request('from', Carbon::now()->subMonth()));
         $to = Carbon::parse(request('to', Carbon::now()));
 
-        /*
-        $saleIds = $insuranceCompany->sales()
-            ->confirmed()
-            ->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])
-            ->pluck('id');
-
-        dd(DB::table('medicine_sale')
-            ->whereIn('sale_id', $saleIds)
-            ->select('sale_id', DB::raw('SUM(insurance_contribution_per_item * quantity) as insurance_price'))
-            ->groupBy('sale_id')
-            ->get());
-         */
-
         $sales = $insuranceCompany->sales()
             ->confirmed()
             ->whereBetween('created_at', [$from->startOfDay(), $to->endOfDay()])

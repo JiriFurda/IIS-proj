@@ -22,9 +22,12 @@ class CartItem
 		return $this->medicine->price * $this->quantity;
 	}
 
-	public function verifyStock()
+	public function verifyStock($branch = null)
 	{
-		if(Branch::current()->getQuantityInStock($this->medicine) >= $this->quantity)
+	    if(is_null($branch))
+	        $branch = Branch::current();
+
+		if($branch->getQuantityInStock($this->medicine) >= $this->quantity)
 			return true;
 		return false;
 	}

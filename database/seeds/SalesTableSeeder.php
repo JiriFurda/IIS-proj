@@ -5,6 +5,7 @@ use App\Medicine;
 use App\Branch;
 use App\User;
 use App\Classes\CartItem;
+use App\Sale;
 
 class SalesTableSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class SalesTableSeeder extends Seeder
     {
         $this->seedFirst();
 
+        factory(Sale::class, 1000)->create();
     }
 
     private function seedFirst()

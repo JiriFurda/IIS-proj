@@ -29,21 +29,25 @@
         @if(empty($reports))
             <p>V období od {{$from}} do {{$to}} není pro danou pojišťovnu evidován žádný výkaz.</p>
         @else
-            <table>
+            <table class="table table-dark">
                 <thead>
+                <tr>
                     <th>Období</th>
                     <th>Výše hrazení</th>
+                </tr>
                 </thead>
                 <tbody>
                     @foreach($reports as $report)
-                        <tr>
-                            <td>
-                                {{$report['date']}}
-                            </td>
-                            <td>
-                                {{$report['price']}} Kč
-                            </td>
-                        </tr>
+                        @if($report['price'])
+                            <tr>
+                                <td>
+                                    {{$report['date']}}
+                                </td>
+                                <td>
+                                    {{$report['price']}} Kč
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
