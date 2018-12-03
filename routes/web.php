@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/reservations/store', 'ReservationController@store')->name('reservations.store');
 
     // Users
-    Route::middleware('role:superior')->group(function () {
+    Route::middleware('role:admin')->group(function () {
         Route::get('/users', 'UserController@index')->name('users.index');
         Route::get('/users/create', 'UserController@create')->name('users.create');
         Route::post('/users/create', 'UserController@store')->name('users.store');

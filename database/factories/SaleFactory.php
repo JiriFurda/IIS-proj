@@ -29,7 +29,7 @@ $factory->define(Sale::class, function (Faker $faker) {
         $cart[] = new CartItem($medicine, $amount);
     }
 
-    $createdAt = Carbon::parse($faker->dateTimeBetween('-1 year', 'now', 'Europe/Prague')->format("Y-m-d H:i:s"));
+    $createdAt = Carbon::parse($faker->dateTimeBetween('-3 months', 'now', 'Europe/Prague')->format("Y-m-d H:i:s"));
 
     $confimedAt = clone $createdAt;
     $createdAt->addSeconds($faker->numberBetween(1, 900));
@@ -38,9 +38,21 @@ $factory->define(Sale::class, function (Faker $faker) {
 
     if($prescripted)
     {
+        $nins = collect([
+            9404201917,
+            7306053535,
+            9260123092,
+            5712084884,
+            9108185988,
+            6858229829,
+            7554282208,
+            6260136850,
+            6712146364
+        ]);
+
         $sale = $branch->addSale([
             'user_id' => User::inRandomOrder()->first()->id,
-            'customer_nin' => 123,
+            'customer_nin' => $nins->random(1)->get(0),
             'insurance_company_id' => InsuranceCompany::inRandomOrder()->first()->id,
             'created_at' => $createdAt,
             'updated_at' => $confimedAt,

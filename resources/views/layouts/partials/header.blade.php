@@ -32,7 +32,7 @@
                             <li>
                                 <a href="{{ route('supply.create') }}"><button type="button" class="btn btn-info btn-sm">Dodávka</button></a>
                             </li>
-                            @if(auth()->user()->isAuthorised('superior'))
+                            @if(auth()->user()->isAuthorised('admin'))
                                 <li>
                                     <a href="{{ route('users.index') }}"><button type="button" class="btn btn-info btn-sm">Uživatelé</button></a>
                                 </li>

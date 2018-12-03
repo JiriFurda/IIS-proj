@@ -37,7 +37,7 @@ class InsuranceComapnyController extends Controller
             return redirect()->route('insurance_companies.sales', $parameters)->withErrors($validator); // Not exactly the smartest solution
         }
 
-        $from = Carbon::parse(request('from', Carbon::now()->subYear()));
+        $from = Carbon::parse(request('from', Carbon::now()->subMonth()));
         $to = Carbon::parse(request('to', Carbon::now()));
 
         $sales = $insuranceCompany->sales()
