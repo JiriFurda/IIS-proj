@@ -38,7 +38,7 @@ $factory->define(Sale::class, function (Faker $faker) {
 
     if($prescripted)
     {
-        return $branch->addSale([
+        $sale = $branch->addSale([
             'user_id' => User::inRandomOrder()->first()->id,
             'customer_nin' => 123,
             'insurance_company_id' => InsuranceCompany::inRandomOrder()->first()->id,
@@ -46,16 +46,21 @@ $factory->define(Sale::class, function (Faker $faker) {
             'updated_at' => $confimedAt,
             'confirmed_at' => $confimedAt,
             'confirmed' => true,
-        ], $cart);
+        ], $cart, true);
     }
     else
     {
-        return $branch->addSale([
+        $sale = $branch->addSale([
             'user_id' => User::inRandomOrder()->first()->id,
             'created_at' => $createdAt,
             'updated_at' => $confimedAt,
             'confirmed_at' => $confimedAt,
             'confirmed' => true,
-        ], $cart);
+        ], $cart, true);
     }
+
+    $return = $sale->getAttributes();
+    unset($return['id']);
+
+    return $return;
 });

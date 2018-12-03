@@ -18,7 +18,7 @@ class SalesTableSeeder extends Seeder
     {
         $this->seedFirst();
 
-        factory(Sale::class, 1)->create();
+        factory(Sale::class, 50)->create();
     }
 
     private function seedFirst()
