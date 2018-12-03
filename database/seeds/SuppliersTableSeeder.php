@@ -23,5 +23,17 @@ class SuppliersTableSeeder extends Seeder
 		Supplier::create([
 			'name' => 'Lundbeck'
 		]);
+
+        Supplier::create([
+            'name' => 'Euroclinic'
+        ]);
+
+        Supplier::create([
+            'name' => 'Dialysis'
+        ]);
+
+        Supplier::create([
+            'name' => 'Ansell'
+        ]);
     }
 }

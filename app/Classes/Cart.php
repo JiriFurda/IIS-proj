@@ -27,6 +27,17 @@ abstract class Cart
         return array_sum(session('cart'));
     }
 
+    public static function sum()
+    {
+        $sum = 0;
+        foreach(self::items() as $cartItem)
+        {
+            $sum += $cartItem->medicine->price * $cartItem->quantity;
+        }
+
+        return $sum;
+    }
+
     public static function items()
     {
         if(!session()->has('cart') || empty(session('cart')))
@@ -78,7 +89,7 @@ abstract class Cart
     {
         foreach(self::items() as $cartItem)
         {
-            if($cartItem->medicine->prescripted)
+            if($cartItem->medicine->prescription)
                 return true;
         }
 
@@ -95,7 +106,7 @@ abstract class Cart
         return true;
     }
 
-    public static function earse()
+    public static function erase()
     {
         session()->forget('cart');
     }

@@ -16,26 +16,19 @@ class UserController extends Controller
     	return view('users.index', compact('users'));
     }
 
-/*
-    public function show(InsuranceCompany $insuranceCompany)
-    {
-    	return view('insurance_companies.show', compact('insuranceCompany'));
-    }
-*/
     public function create()
     {
-    	return view('users.create');
+    	return view('users.edit_or_create');
     }
 
     public function store()
     {
-    	//dd('@todo');
-
     	$rules = [
 			'name' => 'required|string',
 			'email' => 'required|email',
 			'password' => 'required|confirmed|min:5',
-			'role_id' => 'required|integer|exists:roles,id' // @todo Auth->User->isAuthorised(Role)
+			'role_id' => 'required|integer|exists:roles,id', // @todo Auth->User->isAuthorised(Role)
+            'branch_id' => 'required|integer|exists:branches,id'
 		];
 
     	$this->validate(request(), $rules); 
@@ -54,6 +47,8 @@ class UserController extends Controller
 		$user->remember_token = str_random(10);
 		$user->save();
 
+        session()->flash('alert-success', 'Uživatel byl úspěšně vytvořen');
+
     	return redirect()->route('users.index');
     }
 
@@ -66,6 +61,29 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-    	dd('@todo');
+    	return view('users.edit_or_create', compact('user'));
+    }
+
+    public function update(User $user)
+    {
+        $rules = [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'nullable|confirmed|min:5',
+            'role_id' => 'required|integer|exists:roles,id', // @todo Auth->User->isAuthorised(Role)
+            'branch_id' => 'required|integer|exists:branches,id'
+        ];
+
+        $this->validate(request(), $rules);
+
+        unset($rules['password']);
+        $user->update(request()->only(array_keys($rules)));
+
+        if(!is_null(request()->input('password')))
+            $user->update(['password' => Hash::make(request()->input('password'))]);
+
+        session()->flash('alert-success', 'Uživatel byl úspěšně aktualizován');
+
+        return redirect()->route('users.index');
     }
 }

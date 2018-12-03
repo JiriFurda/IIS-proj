@@ -21,6 +21,7 @@ class CreateMedicineSalePivotTable extends Migration
             
             $table->unsignedSmallInteger('quantity');
             $table->unsignedSmallInteger('price_per_item');
+            $table->unsignedSmallInteger('insurance_contribution_per_item')->nullable();
         });
     }
 

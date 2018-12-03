@@ -29,5 +29,54 @@ class MedicinesTableSeeder extends Seeder
 			'price' => 22,
 			'prescription' => true
 		]);
+
+
+		Medicine::create([
+		    'name' => 'ALVESCO 160',
+            'price' => 160,
+            'prescription' => true
+        ]);
+
+        Medicine::create([
+            'name' => 'ZENTIVA ',
+            'price' => 330,
+            'prescription' => false
+        ]);
+
+        Medicine::create([
+            'name' => 'OMEPRAZOL',
+            'price' => 120,
+            'prescription' => false
+        ]);
+
+        Medicine::create([
+            'name' => ' COAPROVEL',
+            'price' => 88,
+            'prescription' => false
+        ]);
+
+        Medicine::create([
+            'name' => 'TRIDEPOS',
+            'price' => 120,
+            'prescription' => true
+        ]);
+
+        Medicine::create([
+            'name' => 'AMBROSAN',
+            'price' => 33,
+            'prescription' => false
+        ]);
+
+        Medicine::create([
+            'name' => 'ZALASTA ',
+            'price' => 25,
+            'prescription' => true
+        ]);
+
+        Medicine::create([
+            'name' => 'TRIASYN',
+            'price' => 999,
+            'prescription' => true
+        ]);
     }
 }

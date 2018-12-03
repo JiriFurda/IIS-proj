@@ -18,4 +18,12 @@ class BranchController extends Controller
     {
     	return view('branches.show', compact('branch'));
     }
+
+    public function switch(Branch $branch)
+    {
+        auth()->user()->branch()->associate($branch)->save();
+
+        session()->flash('alert-success', 'Aktuální pobočka byla změněna.');
+        return redirect()->back();
+    }
 }

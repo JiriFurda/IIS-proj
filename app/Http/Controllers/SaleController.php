@@ -23,13 +23,11 @@ class SaleController extends Controller
     	return view('sales.show', compact('sale'));
     }
 
-    public function store()
+    public function store($presriptionValiadated = false)
     {
-    	$branch = Branch::current();
-
     	if(Cart::isEmpty())
     	{
-    		session()->flash('alert-error', 'S prázným košíkem nelze vytvořit prodej.');
+    		session()->flash('alert-danger', 'S prázným košíkem nelze vytvořit prodej.');
     		return back();
     	}
 
@@ -37,42 +35,56 @@ class SaleController extends Controller
 
     	if(!Cart::verifyStock())
     	{
-    		session()->flash('alert-error', 'Na skladě není dostatek léků pro vytvoření prodeje.');
+    		session()->flash('alert-danger', 'Na skladě není dostatek léků pro vytvoření prodeje. Chcete vytvořit <a class="alert-link" href="'.route('reservations.create').'">rezervaci?</a>');
     		return back();
     	}
 
-    	$sale = $branch->addSale(['user_id' => auth()->user()->id]);
+    	if(Cart::hasPrescriptedMedicine())
+        {
+            if(!$presriptionValiadated)
+                return redirect()->route('sales.create_prescripted');
 
-    	foreach(Cart::items() as $cartItem)
-    	{           
-            $sale->medicines()->attach($cartItem->medicine->id,
-                [
-                    'quantity' => $cartItem->quantity,
-                    'price_per_item' => $cartItem->medicine->price
-                ]);
+            $sale = Branch::current()->addSale([
+                'user_id' => auth()->user()->id,
+                'customer_nin' => request()->input('customer_nin'),
+                'insurance_company_id' => request()->input('insurance_company_id'),
+                ], Cart::items());
+        }
+        else
+    	    $sale = Branch::current()->addSale(['user_id' => auth()->user()->id], Cart::items());
 
-    		$cartItem->medicine->decreaseAmountInBranch($branch, $cartItem->quantity);
-
-            // @todo Critical part! Throw + catch and revert whole sale if something goes wrong
-            // Or save it after everything is done? :O
-    	}
-
-    	Cart::earse();
+    	Cart::erase();
 
     	return redirect()->route('sales.show', $sale);
+    }
+
+    public function createPrescripted()
+    {
+        return view('sales.create_prescripted');
+    }
+
+    public function storePrescripted()
+    {
+        $this->validate(request(),
+            [
+                'customer_nin' => 'required',   // @todo regex check
+                'insurance_company_id' => 'required|exists:insurance_companies,id',
+            ]);
+
+        return self::store(true);
     }
 
     public function confirm(Sale $sale)
     {
         if($sale->confirmed)
         {
-            session()->flash('alert-error', 'Prodej je již potvrzen.');
+            session()->flash('alert-danger', 'Prodej je již potvrzen.');
             return back();
         }
 
         if($sale->user_id != auth()->user()->id)
         {
-            session()->flash('alert-error', 'Prodej může potvrdit pouze uživatel, který daný prodej vytvořil.');
+            session()->flash('alert-danger', 'Prodej může potvrdit pouze uživatel, který daný prodej vytvořil.');
             return back();
         }
 

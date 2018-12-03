@@ -1,0 +1,36 @@
+
+ul.my-ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 0;
+    white-space: nowrap;
+}
+
+ul.my-ul > li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+body {
+    color: #9FADBD;
+    background-color: #272C38;
+
+}
+
+a:link:not(.btn):not(.alert-link) {
+    color: #9FADBD;
+    font-weight: bold;
+}
+
+/* visited link */
+a:visited:not(.btn):not(.alert-link) {
+    color: #9FADBD;
+}
+
+.errorMessage {
+    color:red;
+}

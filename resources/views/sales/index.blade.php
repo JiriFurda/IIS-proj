@@ -5,17 +5,19 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Prodeje v databázi:</h1>
+    <div class="container">
+        <h1>Prodeje v databázi:</h1>
 
 	@if(empty($sales))
-		<p>V databázi nejsou žádné pobočky.</p>
+		<p>V databázi nejsou žádné prodeje.</p>
 	@else
 		<ul>
 			@foreach($sales as $sale)
 				<li>
-					{!! $sale->nameLink() !!}
+                    {!! $sale->nameLink() !!} <a style="color:red">{{$sale->confirmed ? null : '(Nepotvrzen)'}}</a>
 				</li>
 			@endforeach
 		</ul>
 	@endif
+    </div>
 @endsection
