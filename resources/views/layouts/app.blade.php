@@ -1,3 +1,13 @@
+<?php
+    function myAsset($path)
+    {
+        if(env('APP_ENV') == 'production')
+            return '../public/'.$path;
+        else
+            return asset($path);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta charset="utf-8">
@@ -9,10 +19,10 @@
     <title>IS lékárny</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ myAsset('css/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ myAsset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="{{ asset('css/common.css') }}" rel="stylesheet">
+    <link href="{{ myAsset('css/common.css') }}" rel="stylesheet">
     <!--<style type="text/css">
         ul.my-ul {
             display: flex;
@@ -39,10 +49,10 @@
             @yield('content')
 
             <!-- Scripts -->
-            <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-            <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-            <script src="{{ asset('js/datepicker-cs.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ myAsset('js/jquery-3.3.1.min.js') }}"></script>
+            <script src="{{ myAsset('js/jquery-ui.min.js') }}"></script>
+            <script src="{{ myAsset('js/datepicker-cs.js') }}"></script>
+            <script src="{{ myAsset('js/bootstrap.bundle.min.js') }}"></script>
             @stack('scripts')
         </body>
 </html>
