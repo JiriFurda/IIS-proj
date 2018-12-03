@@ -2,7 +2,9 @@
     function myAsset($path)
     {
         if(env('APP_ENV') == 'production')
-            return '../public/'.$path;
+        {
+            return '/~xfurda00/IIS-proj/public/'.$path;
+        }
         else
             return asset($path);
     }
