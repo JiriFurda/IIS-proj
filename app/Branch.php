@@ -46,6 +46,12 @@ class Branch extends Model
     // --- Relationship constructors ---
     public function addSale($saleData, $cartItems)
     {
+        foreach($cartItems as $cartItem)
+        {
+            if(!$cartItem->verifyStock())
+                return null;
+        }
+
         $sale = $this->sales()->create($saleData);
 
         foreach($cartItems as $cartItem)
@@ -75,6 +81,25 @@ class Branch extends Model
         }
 
         return $sale;
+    }
+
+
+    public function addSupply($data)
+    {
+        $medicines = $this->medicines;
+        foreach($data as $medicineId => $addedAmount)
+        {
+            if(!$addedAmount)
+                continue;
+
+            if($this->medicines->find($medicineId))
+            {
+                $pivot = $this->medicines->find($medicineId)->pivot;
+                $pivot->update(['amount' => $pivot->amount + $addedAmount]);
+            }
+            else
+                $this->medicines()->attach($medicineId, ['amount' => $addedAmount]);
+        }
     }
 
 

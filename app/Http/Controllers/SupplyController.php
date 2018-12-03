@@ -20,8 +20,6 @@ class SupplyController extends Controller
 
     public function store()
     {
-        //dd('@todo');
-
         $rules = [
             'supply' => ['array', new KeyIsID(Medicine::class), new KeyUnique()],
             'supply.*' => 'nullable|integer|min:0',
@@ -30,20 +28,8 @@ class SupplyController extends Controller
 
         $branch = Branch::current();
 
-        $medicines = $branch->medicines;
-        foreach(request()->input('supply') as $medicineId => $addedAmount)
-        {
-            if(!$addedAmount)
-                continue;
+        $branch->addSupply(request()->input('supply'));
 
-            if($branch->medicines->find($medicineId))
-            {
-                $pivot = $branch->medicines->find($medicineId)->pivot;
-                $pivot->update(['amount' => $pivot->amount + $addedAmount]);
-            }
-            else
-                $branch->medicines()->attach($medicineId, ['amount' => $addedAmount]);
-        }
 
         session()->flash('alert-success', 'Dodávka léků byla úspěšně zaevidována.');
         return redirect()->route('branches.show', $branch);
