@@ -26,5 +26,23 @@ class InsuranceCompaniesTableSeeder extends Seeder
             'name' => 'VZP',
             'code' => 888,
         ]);
+
+
+        InsuranceCompany::create([
+            'name' => 'MAXIMA',
+            'code' => 399,
+        ]);
+
+
+        InsuranceCompany::create([
+            'name' => 'ERV',
+            'code' => 666,
+        ]);
+
+
+        InsuranceCompany::create([
+            'name' => 'AXA',
+            'code' => 522,
+        ]);
     }
 }

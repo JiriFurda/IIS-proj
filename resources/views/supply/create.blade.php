@@ -20,14 +20,8 @@
                         </th>
                     </thead>
                     <tbody>
-                    <?php
-                        $index = 0;
-                    ?>
 
                         @foreach($medicines as $medicine)
-                            <?php
-                                $index++;
-                            ?>
                             <tr>
                                 <td>{!! $medicine->nameLink() !!}</td>
                                 <td>
@@ -35,8 +29,8 @@
                                            name="supply[{{$medicine->id}}]"
                                            min="0">
                                     Ks
-                                    @if ($errors->has("supply.{$index}"))
-                                        @foreach ($errors->get("supply.{$index}") as $error)
+                                    @if ($errors->has("supply.{$medicine->id}"))
+                                        @foreach ($errors->get("supply.{$medicine->id}") as $error)
                                             <div class="errorMessage">
                                                 <strong>{{$error}}</strong>
                                             </div>

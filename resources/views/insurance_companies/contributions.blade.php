@@ -9,7 +9,7 @@
         @else
             <form method="post" action="{{route('insurance_companies.contributions.update', $insuranceCompany)}}">
                 @csrf
-                <table>
+                <table class="table table-dark">
                     <thead>
                         <th>
                             Název léku
@@ -22,13 +22,7 @@
                         </th>
                     </thead>
                     <tbody>
-                    <?php
-                        $index = 0;
-                    ?>
                         @foreach($medicines as $medicine)
-                            <?php
-                                $index++;
-                            ?>
                             <tr>
                                 <td>{!! $medicine->nameLink() !!}</td>
                                 <td>{{ $medicine->price }} Kč</td>
@@ -42,8 +36,8 @@
                                     >
                                     Kč
                                     <br>
-                                    @if ($errors->has("contribution.{$index}"))
-                                        @foreach ($errors->get("contribution.{$index}") as $error)
+                                    @if ($errors->has("contribution.{$medicine->id}"))
+                                        @foreach ($errors->get("contribution.{$medicine->id}") as $error)
                                             <div class="errorMessage">
                                                 <strong>{{$error}}</strong>
                                             </div>
@@ -54,7 +48,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <button type="send">Aktualizovat</button>
+                <button type="send" class="btn btn-success btn-lg">Aktualizovat</button>
             </form>
     </div>
     @endif
