@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Informační systém lékárny</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Jiří Furda <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xfurda0000@stud.fit.vutbr.cz">xfurda00@stud.fit.vutbr.cz</a> -
+		implementace, databázový subsystém
+	</dd>
+	<dd>Peter Havan <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xhavan00@stud.fit.vutbr.cz">xhavan00@stud.fit.vutbr.cz</a> -
+		uživatelské rozhraní, databázový subsystém
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xfurda00/IIS-proj">http://www.stud.fit.vutbr.cz/~xfurda00/IIS-proj</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>reditel@lekarna.cz</td><td>nadrizeny</td><td>Ředitel</td></tr>
+<tr><td>nadrizeny@lekarna.cz</td><td>prodavac</td><td>Nadřízený</td></tr>
+<tr><td>lekarnik1@lekarna.cz</td><td>lekarnik1</td><td>Lékárník</td></tr>
+<tr><td>lekarnik2@lekarna.cz</td><td>lekarnik2</td><td>Lékárník</td></tr>
+<tr><td>lekarnik3@lekarna.cz</td><td>lekarnik3</td><td>Lékárník</td></tr>
+<tr><td>lekarnik4@lekarna.cz</td><td>lekarnik4</td><td>Lékárník</td></tr>
+</tbody></table>
+
+<h2>Implementace</h2>
+<p>Při implementaci jsme využili open-source PHP Framework Laravel. Na úrovni front
+	front-endu byl využit framework bootstrap. Dále byl využit framework Javascriptu jQuery. Implementovany byli všechny případy užití
+ze zadaní IDS/IUS s případným přejmenováním některých případu (objednání
+na košík). ERD vyžadoval více změn - původný ERD neřešil případy, kdy se
+v jednu chvíli provádí operace nad různými druhy léku - například prodej
+prodej různych druhů léku (ne různeho počtu). Ze zadání IIS rovněž vyplýva potřeba přidat
+entitní množinu pro uživatele a role.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Script</th>
+			<th>Případ užití</th>
+		</tr>
+
+		<tr>
+			<td>Sale.php <br>SaleController.php</td>
+			<td>Prodej léku <br></td>
+		</tr>
+
+		<tr>
+			<td>User.php <br>UserController.php</td>
+			<td>Spravovat nadřízené<br>Spravovat dodavatele<br>Spravovat lekárníky<br>Najít zaměstnance</td>
+		</tr>
+
+		<tr>
+			<td>Supplier.php <br>SupplierController.php</td>
+			<td>Spravovat dodavatele<br>Najít dodavatele</td>
+		</tr>
+
+		<tr>
+			<td>Supply.php <br>SupplyController.php</td>
+			<td>Přidat dodávku</td>
+		</tr>
+
+		<tr>
+			<td>Medicine.php <br>MedicineController.php</td>
+			<td>Změnit cenu<br>Spravovat léky<br>Najít lék</td>
+		</tr>
+
+		<tr>
+			<td>Reservation.php <br>ReservationController.php</td>
+			<td>Spravovat rezervaci<br>Najít rezervaci</td>
+		</tr>
+
+		<tr>
+			<td>CartController.php</td>
+			<td>Objednání léku</td>
+		</tr>
+
+		<tr>
+			<td>Branch.php<br>BranchController.php</td>
+			<td>Změnit stav na skladě<br>Zjistit stav na skladě<br>Najít pobočku</td>
+		</tr>
+
+		<tr>
+			<td>Branch.php<br>BranchController.php</td>
+			<td>Spravovat pobočky<br>Změnit stav na skladě<br>Zjistit stav na skladě<br>Najít pobočku</td>
+		</tr>
+
+		<tr>
+			<td>InsuranceCompany.php<br>InsuranceCompanyController.php</td>
+			<td>Spravovat příspěvky pojišťovny<br>Spravovat pojišťovny<br>Najít pojišťovnu</td>
+		</tr>
+
+
+	</tbody>
+</table>
+
+<h2>Požadavky</h2>
+<ul>
+	<li>PHP 7.1.3</li>
+	<li>Laravel 5.7</li>
+	<li>Composer 1.7.2</li>
+	<li>Bootstrap v4.1.2</li>
+	<li>jQuery 3.3.1</li>
+	<li>jQueryUi 1.12</li>
+</ul>
+
+<h2>Postup instalace</h2>
+<ol start="1">
+	<li>Vytvoříme nový Laravel projekt pomocí composer create-project --prefer-dist laravel/laravel IIS-proj</li>
+	<li>Do nově vytvořené složky IIS-proj překopírujeme soubory z archivu xfurda00.zip</li>
+	<li>Inicializujeme databázi provedením příkazů v souboru database-dump.sql</li>
+	<li>V souboru .env upravíme přístupy k MySQL databázi</li>
+	<li>Pomocí příkazu php artisan serve spustíme server a web je poté dostupný na adrese localhost:8000</li>
+
+</ol>
+
+<!--Zde popište, které body zadání (IDS a IIS) nejsou implementovány a z
+jakého důvodu. Např. &#8222;Z časových důvodů nebyla implementována správa 
+uživatelů.&#8221; Pomůžete tím zrychlit opravování, když neimplementované 
+funkce nebudeme muset dlouze hledat.-->
+
+<h2>Diagramy</h2>
+<img src="doc_img/ERD.png">
+<img src="doc_img/UCD.png">
+
+
+</body></html>
