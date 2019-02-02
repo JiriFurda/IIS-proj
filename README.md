@@ -1,9 +1,9 @@
 #  Pharmacy Information System (IIS project)
 Bachelor study at FIT VUT Brno  
 5th semester - winter 2018  
-Subject: **Information Systems (IIS)**
-Task: *[zadani.pdf](/docs/zadani.pdf)* (in Czech)
-Related project: *[Pharmacy Database (IDS)](../IDS-proj)*
+Subject: **Information Systems (IIS)**  
+Task: *[zadani.pdf](./docs/zadani.pdf)* (in Czech)  
+Related project: *[Pharmacy Database (IDS)](../IDS-proj)*  
 
 ## Authors
 * Jiří Furda *(xfurda00)*
