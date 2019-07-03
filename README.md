@@ -6,8 +6,8 @@ Task: *[zadani.pdf](./docs/zadani.pdf)* (in Czech)
 Related project: *[Pharmacy Database (IDS)](../../../IDS-proj)*  
 
 ## Authors
-* Jiří Furda *(xfurda00)*
-* Peter Havan *(xhavan00)*
+* Jiří Furda *(xfurda00)* - Backend
+* Peter Havan *(xhavan00)* - Frontend
 
 ## Score
 * Overall: **27/30**
